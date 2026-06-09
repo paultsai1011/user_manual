@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>黃光請假代班系統 - 互動圖文展示與維護沙盒</title>
+    <title>黃光請假代班系統 - 同仁操作教育訓練與展示沙盒</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
         /* 隱藏滾動條但保持功能 */
         .no-scrollbar::-webkit-scrollbar {
@@ -33,23 +33,24 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
+    <!-- 頂部標題列 -->
     <header class="bg-slate-900/90 border-b border-slate-800/80 sticky top-0 z-40 backdrop-blur-md px-6 py-4 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center space-x-3">
             <div class="bg-emerald-500 text-slate-950 font-black p-2 rounded-xl text-md tracking-wider flex items-center justify-center">
-                <i class="fa-solid fa-clock-rotate-left mr-1.5"></i>黃光
+                <i class="fa-solid fa-users mr-1.5"></i>教育訓練
             </div>
             <div>
                 <h1 class="text-lg font-bold text-white flex items-center gap-2">
-                    LINE & LIFF 排班請假與自主代班系統
-                    <span class="px-2.5 py-0.5 text-[11px] bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20 font-medium">真實截圖對照模擬器</span>
+                    黃光請假代班系統 - 同仁操作線上說明手冊
+                    <span class="px-2.5 py-0.5 text-[11px] bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20 font-medium">同仁學習專用版</span>
                 </h1>
-                <p class="text-xs text-slate-400">使用您提供的 22 張真實截圖，解析 main.txt (GAS) 與 index.txt (LIFF) 的運作架構</p>
+                <p class="text-xs text-slate-400">親愛的同仁：請點選左側場景，跟著手機畫面一步步熟悉「自主登記、請假代班與行程撤銷」的簡單步驟！</p>
             </div>
         </div>
 
         <div class="flex items-center gap-3">
             <div class="bg-slate-950/80 px-4 py-2 rounded-xl border border-slate-800 flex items-center gap-3">
-                <span class="text-xs text-slate-400 font-medium">系統日期：</span>
+                <span class="text-xs text-slate-400 font-medium">模擬系統今日：</span>
                 <span class="text-xs font-mono text-amber-400 font-bold tracking-wider" id="sim-date">2026-06-09</span>
             </div>
         </div>
@@ -57,29 +58,29 @@
 
     <main class="flex-1 p-6 grid grid-cols-1 xl:grid-cols-12 gap-6 max-w-[1600px] mx-auto w-full">
         
-        <!-- 左側：場景切換導覽列 (佔 3 欄) -->
+        <!-- 左側：流程場景選擇 (佔 3 欄) -->
         <section class="xl:col-span-3 flex flex-col space-y-4">
             <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 backdrop-blur-sm flex flex-col h-full">
                 <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-route text-emerald-400"></i> 請選擇模擬操作場景
+                    <i class="fa-solid fa-route text-emerald-400"></i> 請選擇您要學習的功能流程
                 </h2>
                 
-                <!-- 場景清單 -->
+                <!-- 場景按鈕清單 -->
                 <div class="space-y-2 flex-1 overflow-y-auto no-scrollbar" id="scenario-list">
                     <!-- 由 JS 動態渲染 -->
                 </div>
 
-                <!-- 底部簡介 -->
-                <div class="mt-4 p-3 bg-slate-950/60 rounded-xl border border-slate-800/60 text-xs text-slate-400 leading-relaxed space-y-1">
-                    <p class="font-semibold text-slate-200">💡 操作說明：</p>
-                    <p>1. 選擇左側的主題場景以啟動操作故事線。</p>
-                    <p>2. 利用手機底部的「上一步 / 下一步」按鈕循序看圖。</p>
-                    <p>3. 觀察右側面板，瞭解運行的 GAS 原始碼邏輯與 Google Sheets 資料庫的即時狀態變化。</p>
+                <!-- 底部貼心提醒 -->
+                <div class="mt-4 p-4 bg-emerald-500/5 rounded-xl border border-emerald-500/10 text-xs text-slate-400 leading-relaxed space-y-2">
+                    <p class="font-semibold text-emerald-400 flex items-center gap-1">
+                        <i class="fa-solid fa-lightbulb"></i> 系統設計核心：
+                    </p>
+                    <p class="text-[11px]">本系統旨在實現「自主排班異動」，同仁只要雙方談妥代班，直接在 LINE 點選即可完成，不需繁瑣紙本審核，但有「重疊防呆機制」，確保排班安全無縫接軌！</p>
                 </div>
             </div>
         </section>
 
-        <!-- 中央：手機模擬外框與圖片定位點 (佔 4 欄) -->
+        <!-- 中央：手機模擬器與截圖定位焦點 (佔 4 欄) -->
         <section class="xl:col-span-4 flex flex-col items-center justify-start">
             <div class="relative w-[345px] h-[710px] bg-slate-950 rounded-[48px] p-3 shadow-2xl border-[10px] border-slate-800/90 ring-4 ring-slate-800/30 flex flex-col overflow-hidden transition-all duration-300">
                 
@@ -107,19 +108,19 @@
                         <img id="phone-screenshot" src="" alt="Screenshot" class="w-full h-full object-contain select-none transition-all duration-200">
                         
                         <!-- 動態定位脈衝圈 (Focus Hotspot) -->
-                        <div id="hotspot-overlay" class="absolute border-2 border-red-500 rounded-xl pointer-events-none hidden" style="box-shadow: 0 0 15px rgba(239, 68, 68, 0.6)">
-                            <div class="absolute -inset-1.5 border-2 border-red-500 rounded-xl focus-pulse"></div>
-                            <span class="absolute -top-6 left-0 bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-md whitespace-nowrap" id="hotspot-label">
-                                當前操作焦點
+                        <div id="hotspot-overlay" class="absolute border-2 border-emerald-400 rounded-xl pointer-events-none hidden" style="box-shadow: 0 0 15px rgba(52, 211, 153, 0.6)">
+                            <div class="absolute -inset-1.5 border-2 border-emerald-400 rounded-xl focus-pulse"></div>
+                            <span class="absolute -top-6 left-0 bg-emerald-600 text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded shadow-md whitespace-nowrap" id="hotspot-label">
+                                請看此處操作
                             </span>
                         </div>
 
                         <!-- 圖片載入失敗時的精美替代圖 (Failover Mockup) -->
                         <div id="fallback-mockup" class="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center p-6 text-center hidden">
                             <i class="fa-regular fa-image text-slate-600 text-5xl mb-4"></i>
-                            <h3 class="text-sm font-bold text-slate-300 mb-2">正在載入圖片...</h3>
+                            <h3 class="text-sm font-bold text-slate-300 mb-2">正在載入示意畫面...</h3>
                             <p class="text-xs text-slate-500 mb-4" id="fallback-filename">檔案：QR.png</p>
-                            <div class="bg-slate-950/80 p-3 rounded-lg border border-slate-800 text-left w-full text-[11px] font-mono leading-relaxed max-h-[220px] overflow-y-auto no-scrollbar text-emerald-400">
+                            <div class="bg-slate-950/80 p-4 rounded-xl border border-slate-800 text-left w-full text-[11px] leading-relaxed max-h-[220px] overflow-y-auto no-scrollbar text-emerald-400 whitespace-pre-line">
                                 <!-- 替代文字描述 -->
                             </div>
                         </div>
@@ -131,6 +132,7 @@
                 <div class="absolute bottom-1.5 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-slate-800 rounded-full"></div>
             </div>
 
+            <!-- 控制導覽鈕 -->
             <div class="mt-4 flex items-center justify-between w-[345px] bg-slate-900/60 p-2 rounded-xl border border-slate-800/80">
                 <button onclick="prevStep()" id="prev-btn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg text-xs flex items-center transition-colors disabled:opacity-40 disabled:pointer-events-none">
                     <i class="fa-solid fa-chevron-left mr-1"></i> 上一步
@@ -145,52 +147,64 @@
         <!-- 右側：技術核心解析與資料庫連動面板 (佔 5 欄) -->
         <section class="xl:col-span-5 flex flex-col space-y-6">
             
-            <!-- 技術與邏輯分析面板 -->
+            <!-- 同仁步驟與系統響應說明 -->
             <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 backdrop-blur-sm flex flex-col min-h-[340px]">
                 <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
                     <div class="flex items-center space-x-2">
-                        <i class="fa-solid fa-laptop-code text-cyan-400 text-sm"></i>
-                        <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider">🛠️ 雲端核心邏輯與程式碼對應</h2>
+                        <i class="fa-regular fa-comment-dots text-emerald-400 text-sm"></i>
+                        <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider">💡 步驟說明與 LINE 畫面響應對照</h2>
                     </div>
-                    <span id="step-role-badge" class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-slate-800 text-slate-400">角色：載入中</span>
+                    <span id="step-role-badge" class="px-2 py-0.5 text-[10px] font-bold rounded-md bg-emerald-500/10 text-emerald-400">目前身分：載入中</span>
                 </div>
 
                 <div class="space-y-4 flex-1">
+                    <!-- 1. 當前步驟白話說明 -->
                     <div>
                         <h3 class="text-xs text-slate-400 font-semibold mb-1 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span> 步驟說明
+                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> 同仁操作步驟
                         </h3>
                         <p id="step-explanation" class="text-xs text-slate-200 leading-relaxed bg-slate-950/40 p-3 rounded-lg border border-slate-800/40">
-                            正在初始化模擬步驟說明...
+                            正在初始化步驟說明...
                         </p>
                     </div>
 
+                    <!-- 2. LINE 即時訊息與彈窗文字 (替代原本的程式碼區塊) -->
                     <div>
                         <h3 class="text-xs text-slate-400 font-semibold mb-1.5 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> 運行的核心程式碼對應 (index.txt / main.txt)
+                            <span class="w-1.5 h-1.5 bg-sky-400 rounded-full"></span> 💬 LINE 聊天室實際互動內容
                         </h3>
-                        <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 font-mono text-[10.5px] text-emerald-400 relative overflow-x-auto">
-                            <div class="absolute top-2 right-2 text-[9px] bg-slate-900 text-slate-500 px-2 py-0.5 rounded font-sans" id="code-lang-label">
-                                main.txt (GAS)
+                        <div class="bg-slate-950 rounded-xl p-3 border border-slate-800 text-[11px] text-sky-300 relative">
+                            <div class="absolute top-2 right-2 text-[9px] bg-sky-500/10 text-sky-400 px-2 py-0.5 rounded font-bold" id="interactive-type-label">
+                                系統訊息
                             </div>
-                            <pre id="code-snippet-display" class="whitespace-pre overflow-x-auto max-h-[140px] no-scrollbar">
-// 正在解析執行函數...
-                            </pre>
+                            <div id="interactive-text-display" class="whitespace-pre-line leading-relaxed max-h-[140px] overflow-y-auto no-scrollbar font-mono">
+                                <!-- 顯示 LINE bot 對話回覆 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 注意事項提示 -->
+                    <div class="bg-amber-500/5 border border-amber-500/20 rounded-xl p-3 text-[11px] text-amber-300 flex items-start gap-2">
+                        <i class="fa-solid fa-triangle-exclamation mt-0.5 flex-shrink-0 text-amber-400"></i>
+                        <div>
+                            <span class="font-bold">排班規則小提醒：</span>
+                            <span id="step-rule-tip">系統具有自動防呆功能，請務必按照流程確實填寫。</span>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- 雲端試算表狀態連動 (組員教育訓練用：強調一切自動登錄，不需組員手動處理) -->
             <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 backdrop-blur-sm flex flex-col min-h-[290px] flex-1">
                 <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 mb-3 gap-2">
                     <div class="flex items-center space-x-2">
-                        <i class="fa-solid fa-table text-emerald-400 text-sm"></i>
-                        <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider">💾 Google Sheets 即時模擬資料庫</h2>
+                        <i class="fa-solid fa-cloud-arrow-up text-sky-400 text-sm"></i>
+                        <h2 class="text-xs font-bold text-slate-300 uppercase tracking-wider">💾 雲端試算表同步狀態 (背景自動運作，同仁不需動手)</h2>
                     </div>
                     <div class="flex space-x-1 bg-slate-950/60 p-1 rounded-lg border border-slate-800/60 text-[10px] font-bold">
-                        <button onclick="switchTableTab('users')" id="tab-users" class="px-2.5 py-1 rounded bg-emerald-500 text-slate-950">users</button>
-                        <button onclick="switchTableTab('Leaves')" id="tab-Leaves" class="px-2.5 py-1 rounded text-slate-400 hover:text-slate-200">Leaves</button>
-                        <button onclick="switchTableTab('Config_Org')" id="tab-Config_Org" class="px-2.5 py-1 rounded text-slate-400 hover:text-slate-200">Config_Org</button>
+                        <button onclick="switchTableTab('users')" id="tab-users" class="px-2.5 py-1 rounded bg-emerald-500 text-slate-950">同仁登記名冊</button>
+                        <button onclick="switchTableTab('Leaves')" id="tab-Leaves" class="px-2.5 py-1 rounded text-slate-400 hover:text-slate-200">請假與代班紀錄</button>
+                        <button onclick="switchTableTab('Config_Org')" id="tab-Config_Org" class="px-2.5 py-1 rounded text-slate-400 hover:text-slate-200">主管與群組名單</button>
                     </div>
                 </div>
 
@@ -206,16 +220,17 @@
 
     </main>
 
+    <!-- 推播通知小通知 -->
     <div id="sim-toast" class="fixed top-6 right-6 z-50 transform translate-x-[400px] transition-transform duration-500 ease-out max-w-sm w-[320px] bg-slate-900 border-l-4 border-emerald-500 rounded-xl shadow-2xl p-4 flex items-start space-x-3 text-slate-100">
-        <div class="w-9 h-9 rounded-full bg-emerald-500 flex-shrink-0 flex items-center justify-center text-slate-950 font-black text-sm shadow-md">
+        <div class="w-9 h-9 rounded-full bg-emerald-500 flex-shrink-0 flex items-center justify-center text-slate-950 font-black text-xs shadow-md">
             LINE
         </div>
         <div class="flex-1 min-w-0">
             <div class="flex items-center justify-between mb-0.5">
-                <span class="font-bold text-xs text-slate-200">LINE Bot 推播警報</span>
+                <span class="font-bold text-xs text-slate-200">您的手機將收到推播：</span>
                 <span class="text-[9px] text-slate-400 font-mono" id="toast-time">11:18</span>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed" id="toast-msg">有新代班請求通知，請確認！</p>
+            <p class="text-[11px] text-slate-300 leading-relaxed" id="toast-msg">收到來自同仁的代班請求通知，請確認！</p>
         </div>
         <button onclick="hidePushToast()" class="text-slate-400 hover:text-slate-200">
             <i class="fa-solid fa-xmark text-xs"></i>
@@ -224,330 +239,314 @@
 
     <script>
         // ==========================================
-        // 1. 互動式場景與步驟資料定義 (完全對應 22 張圖片與 code 邏輯)
+        // 1. 互動式場景與步驟資料定義 (移除程式碼 snippet，改為組員訊息與規則)
         // ==========================================
         const SCENARIOS = [
             {
                 id: "sc-register",
-                title: "Scenario A: 帳號註冊與綁定",
+                title: "流程 A：新同仁加入與一次性註冊",
                 icon: "fa-user-plus",
                 color: "emerald",
                 steps: [
                     {
                         img: "QR.png",
-                        title: "1.1 掃碼加入 LINE 官方帳號",
+                        title: "步驟 1.1 ➔ 掃描 QR Code 或是搜尋 ID 加入好友",
                         role: "新進同仁",
                         date: "2026-06-09",
                         hotspot: { top: "35%", left: "21%", width: "58%", height: "50%" },
-                        explanation: "新進同仁透過掃描 QR Code 或搜尋 ID @051yicar，將「黃光請假機器人」加入好友，這是註冊與連動後台的首要入口。",
-                        snippet: `// main.txt - 當使用者加入好友時觸發 Webhook 'follow' 事件\nif (event.type === 'follow') {\n  sendHelpMessage(replyToken);\n  return createPostResponse({ status: 'ok' });\n}`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "第一次使用系統前，請拿起手機掃描上圖 QR Code，或直接在 LINE 搜尋官方 ID「@051yicar」加入「黃光請假機器人」為好友。這是啟動所有功能的起點！",
+                        interactiveText: "系統提示：\n「[黃光請假機器人] 已將您加入好友。請點擊聊天室開始您的自主排班請假管理。」",
+                        interactiveType: "好友加入畫面",
+                        ruleTip: "請不要將機器人設為「封鎖」或「開啟免打擾」，否則當有人請假、反悔或代班被退回時，您的手機會無法即時收到緊急警報通知喔！"
                     },
                     {
                         img: "01.png",
-                        title: "1.2 指令選單與系統指令說明",
+                        title: "步驟 1.2 ➔ 在聊天室輸入「說明」或點選選單",
                         role: "新進同仁",
                         date: "2026-06-09",
                         hotspot: { top: "18%", left: "9%", width: "62%", height: "23%" },
-                        explanation: "輸入「說明」或點擊選單，後端將回覆四大核心指令：【註冊】、【請假】、鍵盤【查詢】與【統計】說明。",
-                        snippet: `// main.txt - 系統核心指引回覆\nfunction sendHelpMessage(replyToken) {\n  const helpText = "🎉 歡迎使用排班系統！\\n\\n⚙️ 指令選單：\\n━━━━━━━━━━━━━━━\\n👤 【 註冊 】：綁定姓名與 Leader。\\n📅 【 請假 】：發起代班申請。\\n鍵盤輸入【 查詢 】：未來排班總覽。\\n📊 【 統計 】：即時月度報告。";\n  replyLINE(replyToken, [{ type: 'text', text: helpText }]);\n}`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "初次使用時，可以隨時在對話框輸入中文字「說明」或直接點選圖文選單。機器人會立刻回覆系統的基礎操作指令指引卡，幫助您快速上手四大核心功能。",
+                        interactiveText: "黃光機器人回覆：\n「🎉 歡迎使用黃光排班系統！\n\n⚙️ 快速功能指令對照：\n👤 輸入【 註冊 】：綁定姓名與主管。\n📅 輸入【 請假 】：開始發起代班申請表單。\n🔍 輸入【 查詢 】：隨時調出您未來的請假/代班表。\n📊 輸入【 統計 】：即時看本月組內熱心協助排行。」",
+                        interactiveType: "機器人回覆",
+                        ruleTip: "機器人只認「註冊」、「請假」、「查詢」、「統計」這四個精準指令。請盡量點選下方常設選單（Rich Menu），點一下就能自動送出，不用手動打字！"
                     },
                     {
                         img: "02.png",
-                        title: "1.3 真實姓名與所屬主管登記",
+                        title: "步驟 1.3 ➔ 完成真實姓名與所屬 Leader 登記",
                         role: "新進同仁",
                         date: "2026-06-09",
                         hotspot: { top: "34%", left: "9%", width: "58%", height: "31%" },
-                        explanation: "輸入「註冊」➔ 系統引導回覆真實姓名➔ 回覆「測試用」➔ 後端自動從試算表 Config_Org 工作表撈取所有 Leader 名單，以按鈕範本供使用者選取。",
-                        snippet: `// main.txt - 姓名輸入完成，自動撈取 Leader 名單以 Button Template 渲染\nconst leaderActions = leaders.map(leader => {\n  return { type: "postback", label: leader, data: \`action=selectLeader&leaderName=\${leader}\` };\n});\nconst message = {\n  type: "template", altText: "請選擇您的所屬 Leader",\n  template: {\n    type: "buttons",\n    text: \`確認您的姓名為【\${userMessage}】。\\n請接著點選您的所屬 Leader：\`,\n    actions: leaderActions.slice(0, 4)\n  }\n};`,
-                        snippetLang: "main.txt (GAS)",
-                        dbAction: {
-                            table: "users",
-                            action: "add",
-                            data: { id: "U_TEST_USER", name: "測試用", leader: "洪偉智", status: "已完成" }
-                        }
+                        explanation: "輸入「註冊」後，請按照機器人指引打上您的『真實姓名』（此處測試打上『測試用』）。接著，聊天室會自動跳出主管（Leader）選單。請點選您實際隸屬的主管（例如：點選『洪偉智』）即完成一次性綁定！",
+                        interactiveText: "黃光機器人登記引導：\n「確認您的姓名為【測試用】。\n請接著點選您的所屬主管：\n👉 [湯榮銘]  👉 [洪偉智]  👉 [江亞承]  👉 [潘承陽]\n\n(點選後) ➔ 🎉 註冊登記成功！您已被歸類在 [洪偉智] 主管組別。現在可以開始使用排班異動服務。」",
+                        interactiveType: "按鈕與登記卡片",
+                        ruleTip: "請務必填寫您的「中文真實姓名」，不可使用英文暱稱或代號。否則，其他同仁在請假找代班人時，在下拉名單中會找不到您！主管也無法正確匯出報表。"
                     }
                 ]
             },
             {
                 id: "sc-apply",
-                title: "Scenario B: 請假發起與代班人同意",
+                title: "流程 B：我想請假：送出申請與代班確認",
                 icon: "fa-calendar-check",
                 color: "blue",
                 steps: [
                     {
                         img: "03.png",
-                        title: "2.1 輸入請假指令開啟 LIFF",
+                        title: "步驟 2.1 ➔ 輸入「請假」開啟網頁表單",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
                         hotspot: { top: "18%", left: "9%", width: "58%", height: "12%" },
-                        explanation: "在 LINE 輸入「請假」➔ 系統檢索使用者註冊狀態。已註冊使用者會收到回覆「填寫請假代班」之 LIFF 綠色網頁按鈕。",
-                        snippet: `// main.txt - 當使用者輸入「請假」且已註冊時，發送 LIFF 按鈕\nif (userMessage === '請假') {\n  if (userState.status === '已完成') {\n    sendLiffButton(replyToken);\n  } else {\n    replyLINE(replyToken, [{ type: 'text', text: '⚠️ 您尚未完成註冊...' }]);\n  }\n}`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "當您需要請假時，直接在 LINE 對話框輸入「請假」，或點擊選單。只要您是已註冊同仁，機器人就會立刻傳送「填寫請假代班」的綠色傳送連結，點擊它即可免登入開啟專屬請假網頁！",
+                        interactiveText: "黃光機器人回覆：\n「請點擊下方綠色按鈕開啟排班請假申請表：\n🟢 [點我開啟排班請假申請 (LIFF網頁)]」",
+                        interactiveType: "LIFF 網頁入口連結",
+                        ruleTip: "此網頁與 LINE 帳號深度連動。開啟時它會自動讀取您的身份，您不需再輸入複雜帳號密碼，直接安全登入！"
                     },
                     {
                         img: "04.png",
-                        title: "2.2 於 LIFF 網頁選擇代班同仁",
+                        title: "步驟 2.2 ➔ 選擇日期，並精準選取代班人",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
                         hotspot: { top: "30%", left: "9%", width: "82%", height: "56%" },
-                        explanation: "開啟 LIFF 網頁。網頁透過 `liff.getProfile()` 取得 LINE ID，並跟 users 工作表比對自動帶入請假姓名。使用者選擇請假日期 (2026-06-10)，並透過所屬 Leader 組別（湯榮銘組）下拉篩選其底下成員蔡一傑。",
-                        snippet: `// index.txt - 動態篩選非請假者之組內註冊成員\nconst filtered = allUsers.filter(u => u.leader === selectedLeader && u.id !== userId);\nfiltered.forEach(u => {\n  coverUserSelect.innerHTML += \`<option value="\${u.id}">\${u.name}</option>\`;\n});`,
-                        snippetLang: "index.txt (LIFF)"
+                        explanation: "進入網頁後：\n1. 請假姓名已自動鎖定，無法竄改。\n2. 點選『請假日期』(例如選定 2026-06-10)。\n3. 第一步選擇代班同仁的主管 (例: 湯榮銘)。\n4. 第二步即可精準選取該主管下的組員 (例: 蔡一傑)。雙層選單讓您不怕選錯人！",
+                        interactiveText: "請假表單頁面欄位：\n【請假同仁】：測試用 (系統已鎖定)\n【選擇日期】：2026-06-10\n【1. 選擇代班主管】：湯榮銘\n【2. 選擇代班同仁】：蔡一傑",
+                        interactiveType: "前端網頁畫面",
+                        ruleTip: "請假日期不可點選今天之前的「過去日期」！系統只允許預先請假。且代班同仁清單會自動過濾掉您自己，您無法自己幫自己代班。"
                     },
                     {
                         img: "05.png",
-                        title: "2.3 送出排班代班申請",
+                        title: "步驟 2.3 ➔ 送出申請，網頁彈窗確認",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
                         hotspot: { top: "45%", left: "21%", width: "58%", height: "20%" },
-                        explanation: "按下「送出請假申請」➔ 前端進行安全防呆與過期阻擋驗證，送出 API 請求至 GAS 後端儲存。彈窗提示成功後，系統自動關閉網頁視窗。",
-                        snippet: `// index.txt - 送出表單到 GAS 後端\nconst response = await fetch(GAS_URL, {\n  method: 'POST',\n  body: JSON.stringify({ action: 'applyLeave', userId, leaveDate, coverUser })\n});\nconst result = await response.json();\nif (result.status === 'success') {\n  alert('🎉 申請成功！已通知代班同仁。');\n  liff.closeWindow();\n}`,
-                        snippetLang: "index.txt (LIFF)",
-                        dbAction: {
-                            table: "Leaves",
-                            action: "add",
-                            data: { recordId: "R20260610", applyId: "U_TEST_USER", applyName: "測試用", date: "2026-06-10", coverId: "U005", coverName: "蔡一傑", status: "待確認" }
-                        }
+                        explanation: "按下最底部的『送出請假申請』。此時系統會進行雲端即時防呆驗證。驗證成功後，網頁會彈出『🎉 申請成功！已通知代班同仁。』確認彈窗，點擊確認後網頁將自動關閉，返回 LINE 視窗。",
+                        interactiveText: "網頁提示訊息：\n「🎉 申請成功！已通知代班同仁。系統已發送審核訊息給您指定的代班人。請提醒對方至 LINE 進行確認同意！」",
+                        interactiveType: "網頁確認彈窗",
+                        ruleTip: "此時「請假紀錄」已在背景登錄為『待確認』狀態，但尚未正式生效！必須等代班人在他的 LINE 按下同意，排班表的變更才算正式完成！"
                     },
                     {
                         img: "14.png",
-                        title: "2.4 代班人收到 Flex 審核請求",
+                        title: "步驟 2.4 ➔ 代班人蔡一傑在 LINE 收到確認通知",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-10",
                         hotspot: { top: "20%", left: "10%", width: "80%", height: "23%" },
-                        explanation: "代班同仁「蔡一傑」的 LINE 帳號此時主動收到後台發送的一則 Flex Message 審核訊息。顯示有新代班請求，包含「同意代班」與「無法代班」兩個決策按鈕。",
-                        snippet: `// main.txt - 推送代班審核 Flex 卡片到代班人 LINE 聊天室\nfunction pushFlexToCoverUser(coverUserId, leaveUserName, leaveDate, recordId) {\n  UrlFetchApp.fetch('https://api.line.me/v2/bot/message/push', {\n    method: 'post',\n    headers: { 'Authorization': 'Bearer ' + CHANNEL_ACCESS_TOKEN },\n    payload: JSON.stringify({\n      to: coverUserId,\n      messages: [{\n        type: "flex", altText: "有新代班請求",\n        contents: {\n          type: "bubble",\n          body: { ... },\n          footer: {\n            type: "box", layout: "horizontal", contents: [\n              { type: "button", style: "primary", color: "#06C755", action: { type: "postback", label: "同意代班", data: \`action=accept&recordId=\${recordId}\` } },\n              { type: "button", style: "secondary", color: "#FF3B30", action: { type: "postback", label: "無法代班", data: \`action=reject&recordId=\${recordId}\` } }\n            ]\n          }\n        }\n      }]\n    })\n  });\n}`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "此時，您指定的代班同仁「蔡一傑」在 LINE 會立刻收到一個亮眼的審核通知卡片。卡片上清楚顯示是誰、在什麼時候請假。蔡一傑可以自由點選卡片底部的『同意幫忙』或『無法代班』按鈕！",
+                        interactiveText: "蔡一傑手機上的卡片：\n「✋ 代班請求通知\n同仁【測試用】請求您在 [2026-06-10] 協助代班。\n\n[ 同意幫忙 ]   [ 無法代班 ]」",
+                        interactiveType: "代班人 LINE 卡片",
+                        ruleTip: "為防同仁互相填錯，代班卡片具有唯一綁定功能。只有卡片指定的接收人「蔡一傑」點選才有反應，其他人轉傳、點選都是無效的！"
                     },
                     {
                         img: "17.jpg",
-                        title: "2.5 代班人點選同意確認",
+                        title: "步驟 2.5 ➔ 代班人按下同意，代班手續完成",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-10",
                         hotspot: { top: "45%", left: "19%", width: "62%", height: "23%" },
-                        explanation: "蔡一傑點選「同意代班」➔ 後端系統在寫入 Sheets 前會進行二次攔截防呆（確保當天蔡一傑未請假、蔡一傑當天沒有重複代班等）。驗證無誤後修改 Leaves 狀態為 'OK'。代班人手機會收到回覆確認，並附帶異動中心的快捷 Flex 卡片。",
-                        snippet: `// main.txt - 驗證通過，將狀態改為 OK，並對請假人發送成功通知\nleaveSheet.getRange(rowIndex, 7).setValue('OK');\nreplyLINE(replyToken, [{ type: 'text', text: '確認成功！感謝您協助代班。\\n若後續有需要變更...' }]);\npushCancelButton(coverUserId);\npushText(leaveUserId, \`👍 好消息！ \${coverUserName} 已同意在 \${leaveDate} 幫您代班！\\n試算表狀態已更新為【OK】。\`);`,
-                        snippetLang: "main.txt (GAS)",
-                        dbAction: {
-                            table: "Leaves",
-                            action: "update",
-                            query: { recordId: "R20260610" },
-                            updateData: { status: "OK" }
-                        }
+                        explanation: "當代班人「蔡一傑」確認當天時間允許，並點擊『同意幫忙』➔ 系統自動更新雲端班表為 OK 生效，並發送確認訊息，告知同仁可以隨時至「自主異動中心」查看未來代班歷史。",
+                        interactiveText: "蔡一傑手機回覆訊息：\n「確認成功！感謝您熱心協助同仁代班。\n\n若後續因故臨時有變更，可點擊下方按鈕進入「排班自主異動中心」進行勾選取消作廢。\n👉 [ 進入異動中心 ]」",
+                        interactiveType: "代班人同意回饋",
+                        ruleTip: "當代班人點選同意後，系統會在雲端後台進行安全審查，檢查代班人當天是否自己有請假。如果代班人當天自己也請假，系統會警告並拒絕受理，以保障當天黃光站台有人值班！"
                     },
                     {
                         img: "06.png",
-                        title: "2.6 請假同仁即時接收 OK 通知",
+                        title: "步驟 2.6 ➔ 請假同仁即時收到「OK 生效通知」",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
                         hotspot: { top: "32%", left: "9%", width: "68%", height: "10%" },
-                        explanation: "請假同仁「測試用」手機 LINE 同步收到主動通知（Push Message）：「👍 好消息！蔡一傑已同意在 2026-06-10 幫您代班！試算表已更新為 OK。」，排班請假作業正式生效完成。",
-                        snippet: `// main.txt - 異步向請假人發出主動推播通知\npushText(leaveUserId, \`👍 好消息！ \${coverUserName} 已同意在 \${leaveDate} 幫您代班！\\n試算表狀態已更新為【OK】。\`);`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "代班人蔡一傑點下同意的那一刻，請假同仁「測試用」的手機 LINE 會瞬間收到主動推播喜訊：『👍 好消息！蔡一傑已同意在 2026-06-10 幫您代班！試算表狀態已正式更新為【OK】。』，請假程序大功告成！",
+                        interactiveText: "測試用手機主動推播：\n「👍 好消息！蔡一傑已同意在 2026-06-10 幫您代班！\n\n試算表狀態已更新為【OK】，您可以安心休假囉。」",
+                        interactiveType: "請假人手機推播",
+                        ruleTip: "在沒收到這則「OK 生效」推播前，代表代班手續尚未正式成立。請務必跟代班同仁保持確認，確保對方有在 LINE 上按下按鈕！"
                     }
                 ]
             },
             {
                 id: "sc-prevent",
-                title: "Scenario C: 安全衝突攔截與拒絕",
+                title: "流程 C：重複防呆與無法代班的退回通知",
                 icon: "fa-ban",
                 color: "rose",
                 steps: [
                     {
                         img: "07.png",
-                        title: "3.1 重複申請安全防呆攔截",
+                        title: "步驟 3.1 ➔ 重複申請同一天將會被系統阻擋",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
                         hotspot: { top: "45%", left: "21%", width: "58%", height: "20%" },
-                        explanation: "若同仁嘗試對「已經有請假或代班成立的同天日期」重複送出請假，在網頁前端點選送出時會被防呆規則即時攔截並跳出警告「⚠️ 申請攔截：您在該日期已有申請紀錄...」，避免試算表資料髒亂。",
-                        snippet: `// main.txt - 後端在 POST 請求中實施多重複合式防呆驗證\nif (checkDate === leaveDate && (checkStatus === 'OK' || checkStatus === '待確認')) {\n  if (rowLeaveUserId === leaveUser) {\n    return createPostResponse({ status: 'error', message: \`您在 \${leaveDate} 這天已經有申請紀錄了...\` });\n  }\n}`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "系統設有嚴密防呆！如果同仁忘記自己之前已經在 2026-06-10 請過假，又或者該日期的請假還在『待確認』審核中，同仁若是重複嘗試對同一天送出請假，在網頁前端點下送出時，會立刻彈出黃色警告攔截，禁止送出！",
+                        interactiveText: "網頁彈窗警告：\n「⚠️ 申請攔截：您在 2026-06-10 這天已經有正在進行中(或已同意)的申請紀錄囉，請勿重複提交表單！」",
+                        interactiveType: "網頁防呆彈窗",
+                        ruleTip: "這能確保雲端資料庫保持乾淨整齊，不會發生一筆休假有多個代班人的錯亂狀況。"
                     },
                     {
                         img: "15.jpg",
-                        title: "3.2 代班人因故拒絕代班請求",
+                        title: "步驟 3.2 ➔ 代班人蔡一傑拒絕代班申請",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-24",
                         hotspot: { top: "45%", left: "19%", width: "62%", height: "13%" },
-                        explanation: "蔡一傑若因故無法協助代班，點選「無法代班」➔ 後台將該 Record 的狀態設定為 NO，並向蔡一傑回覆「已幫您回報無法代班，系統將自動通知原請假同仁。」",
-                        snippet: `// main.txt - 處理 postback 的拒絕代班邏輯\nelse if (action === 'reject') {\n  leaveSheet.getRange(rowIndex, 7).setValue('NO');\n  replyLINE(replyToken, [{ type: 'text', text: '已幫您回報無法代班，系統將自動通知原請假同仁。' }]);\n  pushText(leaveUserId, \`❌ 嗶嗶！ \${coverUserName} 已【拒絕】您在 \${leaveDate} 的代班請求... \`);\n}`,
-                        snippetLang: "main.txt (GAS)",
-                        dbAction: {
-                            table: "Leaves",
-                            action: "add",
-                            data: { recordId: "R20260624", applyId: "U_TEST_USER", applyName: "測試用", date: "2026-06-24", coverId: "U005", coverName: "蔡一傑", status: "NO" }
-                        }
+                        explanation: "如果蔡一傑看了一下排班，發現 2026-06-24 當天自己也有事，因此在 LINE 點點點點擊了紅色按鈕『無法代班』。系統會立刻將該筆代班申請的狀態標記為 NO（拒絕不生效），並向蔡一傑回覆「已完成回報」。",
+                        interactiveText: "蔡一傑手機回覆訊息：\n「已幫您回報無法代班，系統將自動通知原請假同仁。辛苦了！」",
+                        interactiveType: "代班人拒絕回饋",
+                        ruleTip: "如果不小心按錯了，或者後來又可以代班，請請假同仁再次發起請假，重新傳送一次按鈕即可！"
                     },
                     {
                         img: "08.png",
-                        title: "3.3 請假同仁收到代班拒絕通知",
+                        title: "步驟 3.3 ➔ 請假同仁 LINE 即時接收退回警報",
                         role: "請假人 (測試用)",
                         date: "2026-06-24",
                         hotspot: { top: "32%", left: "9%", width: "68%", height: "10%" },
-                        explanation: "請假同仁「測試用」手機 LINE 收到主動紅色推播：「❌ 嗶嗶！蔡一傑已【拒絕】您在 2026-06-24 的代班請求。請點選請假按鈕重新發起代班！」",
-                        snippet: `// main.txt - 推送拒絕警告至原請假同仁\npushText(leaveUserId, \`❌ 嗶嗶！ \${coverUserName} 已【拒絕】您在 \${leaveDate} 的代班請求。\\n請您點擊「請假」重新向其他同仁代班！\`);`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "當代班人「蔡一傑」拒絕的那一秒鐘，請假人「測試用」手機 LINE 會自動彈出醒目的紅色退回推播。告知對方已拒絕，請同仁務必點選請假功能重新尋找其他同仁代班！",
+                        interactiveText: "測試用手機接收推播：\n「❌ 嗶嗶！蔡一傑已【拒絕】您在 2026-06-24 的代班請求。\n\n請您點擊「請假」重新向其他同仁代班！」",
+                        interactiveType: "請假人被拒推播",
+                        ruleTip: "收到這則退回通知時，代表您該天的假「尚未找到代班人」，請儘速點擊「請假」另外尋求組內同仁協助代班！"
                     }
                 ]
             },
             {
                 id: "sc-manage",
-                title: "Scenario D: 綜合查詢與自主撤銷",
+                title: "流程 D：綜合查詢與自主請假撤銷",
                 icon: "fa-magnifying-glass",
                 color: "indigo",
                 steps: [
                     {
                         img: "09.png",
-                        title: "4.1 未來排班與異動綜合查詢",
+                        title: "步驟 4.1 ➔ 輸入「查詢」看個人排班表與連結",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
                         hotspot: { top: "18%", left: "10%", width: "64%", height: "51%" },
-                        explanation: "同仁輸入「查詢」➔ GAS 後端檢索試算表 Leaves 中，所有與該同仁 LINE ID 相關的未來有效紀錄➔ 區分「📤 1. 您發起的請假申請」與「📥 2. 您答應的代班行程」呈現給同仁，並附帶進入自主異動中心的按鈕選項。",
-                        snippet: `// main.txt - 合併查詢我的請假與代班，並按日期排序\nfor (let i = 1; i < rows.length; i++) {\n  if (leaveUserId === userId && status !== 'NO') {\n    myLeaves.push({ date: leaveDateStr, coverName: coverUserName, status: status });\n  }\n  if (coverUserId === userId && status === 'OK') {\n    myCovers.push({ date: leaveDateStr, leaveName: leaveUserName });\n  }\n}`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "想知道自己未來有哪幾天請假成功、或者哪幾天答應要幫別人代班嗎？直接在 LINE 聊天室鍵盤打上中文字「查詢」，機器人就會幫您將未來的所有班表總整理，並分門別類列出。同時附上變更連結！",
+                        interactiveText: "黃光機器人回覆查詢：\n「🔍 【您的未來排班異動總覽】\n\n📤 1. 您發起的請假申請：\n▫️ 2026-06-10 (代班人: 蔡一傑 [OK])\n▫️ 2026-06-11 (代班人: 蔡一傑 [OK])\n▫️ 2026-06-29 (代班人: 蔡一傑 [OK])\n\n📥 2. 您答應的代班行程：\n▫️ 2026-06-09 (幫【蔡一傑】代班)\n\n━━━━━━━━━━━━━━━\n💡 若欲撤銷請假或特定代班，請點點擊下方按鈕：\n🚨 [ 進入自主異動中心 (撤回/取消) ]」",
+                        interactiveType: "機器人查詢結果",
+                        ruleTip: "過去已經發生過的請假、代班行程會自動被過濾掉，系統只會條列未來即將到來的行程，畫面清爽不雜亂！"
                     },
                     {
                         img: "10.png",
-                        title: "4.2 開啟排班自主異動中心",
+                        title: "步驟 4.2 ➔ 進入「自主異動中心」網頁列表",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
                         hotspot: { top: "27%", left: "9%", width: "82%", height: "46%" },
-                        explanation: "同仁點選「進入自主異動中心」按鈕後，會透過帶參 LIFF (`?page=cancel`) 載入，網頁中將清楚列出未來所有可操作的請假與代班明細。",
-                        snippet: `// index.txt - 取得我可取消或作廢的代班與請假清單\nconst response = await fetch(\`\${GAS_URL}?action=getmymanageablecovers&userId=\${userId}\`);\nconst data = await response.json();\ndata.forEach(item => {\n  // 根據角色(role)區分渲染畫面...\n});`,
-                        snippetLang: "index.txt (LIFF)"
+                        explanation: "點選「進入自主異動中心」按鈕會開啟專屬 LIFF 網頁，網頁上會用明確的紅色/藍色標籤，列出您「我請假 (📤)」與「我代班 (📥)」的所有未來明細。只要勾選想要撤銷的排班行，即可執行一鍵取消！",
+                        interactiveText: "異動中心網頁畫面：\n「💡 請勾選您欲作廢的未來日期（系統將精準移除該天並自動通知對方同仁）：\n\n[X] 2026-06-11 - 我請假 (由蔡一傑代班) [OK]\n[ ] 2026-06-09 - 我代班 (幫蔡一傑代班) [OK]\n[ ] 2026-06-29 - 我請假 (由蔡一傑代班) [OK]\n[ ] 2026-06-10 - 我請假 (由蔡一傑代班) [OK]」",
+                        interactiveType: "前端網頁畫面",
+                        ruleTip: "撤銷與反悔動作「最遲必須在排班日期當天之前」完成！當天及過去的排班行程在網頁上是不會顯示、也無法點選取消的喔！"
                     },
                     {
                         img: "11.png",
-                        title: "4.3 行程勾選撤銷作廢",
+                        title: "步驟 4.3 ➔ 勾選日期並按下確認作廢",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
                         hotspot: { top: "45%", left: "21%", width: "58%", height: "20%" },
-                        explanation: "同仁選取想要作廢的日期，並點擊下方「確認撤銷/作廢選取日期」按鈕。系統彈出確定對話視窗進行雙重安全提示。",
-                        snippet: `// index.txt - 自主異動作廢的勾選確認與收集\nconst checkboxes = document.querySelectorAll('input[name="recordId"]:checked');\nif (checkboxes.length === 0) { alert('請至少勾選一個欲作廢的日期！'); return; }\nif (!confirm('確定要將勾選日期的排班紀錄作廢移除嗎？')) return;`,
-                        snippetLang: "index.txt (LIFF)"
+                        explanation: "勾選完您想要作廢的日期後，點點擊最下方的『確認撤銷/作廢選取日期』按鈕。此時網頁會再次跳出二次警示對話框：『確定要將勾選日期的排班紀錄作廢移除嗎？』確保同仁不是一時手滑按錯。",
+                        interactiveText: "網頁確認對話框：\n「確定要將勾選日期的排班紀錄作廢移除嗎？\n⚠️ 取消後，系統會自動在後台進行除名，並將發送 LINE 通知給原本與您配對的同仁蔡一傑！」",
+                        interactiveType: "二次確認彈窗",
+                        ruleTip: "請放心，系統邏輯十分嚴密。撤銷成功的同時，後台試算表會自動將該筆紀錄註銷，代班名單會恢復原狀，完全不需要手動翻看排班表修改。"
                     },
                     {
                         img: "12.png",
-                        title: "4.4 變更作廢成功並完成扣除",
+                        title: "步驟 4.4 ➔ 網頁彈窗確認作廢扣除完成",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
                         hotspot: { top: "45%", left: "21%", width: "58%", height: "20%" },
-                        explanation: "點擊確認作廢➔ LIFF 前端傳送 POST 數據通知 GAS 後端。後端將試算表該列狀態修改為 'NO' 扣除成功。網頁彈出變更成功提示並關閉視窗。",
-                        snippet: `// index.txt - 傳送作廢 IDs 數據至後端執行\nawait fetch(GAS_URL, {\n  method: 'POST',\n  body: JSON.stringify({ action: 'cancelSpecificCovers', selectedIds: ids, operatorUserId: userId })\n});\nalert('🚨 變更成功！排班紀錄已作廢扣除。'); liff.closeWindow();`,
-                        snippetLang: "index.txt (LIFF)",
-                        dbAction: {
-                            table: "Leaves",
-                            action: "update",
-                            query: { date: "2026-06-11" },
-                            updateData: { status: "NO" }
-                        }
+                        explanation: "按下確認後，網頁會彈出紅色警告驚嘆號對話框：『🚨 變更成功！排班紀錄已作廢扣除。』，點選確定即可自動關閉網頁。後台的假單正式宣告註銷，不留任何混亂髒資料。",
+                        interactiveText: "網頁提示訊息：\n「🚨 變更成功！排班紀錄已作廢扣除。\n\n系統已完成取消，並已寄發通知訊息給蔡一傑。網頁視窗即將自動關閉。」",
+                        interactiveType: "網頁完成彈窗",
+                        ruleTip: "請同仁作廢後可以回到 LINE 聊天室再次輸入「查詢」，確認該筆請假或代班是不是已經被順利移除囉！"
                     },
                     {
                         img: "16.jpg",
-                        title: "4.5 通知蔡一傑不用去代班了",
+                        title: "步驟 4.5 ➔ 代班同仁手機自動收到「免代班」溫馨通知",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-11",
                         hotspot: { top: "54%", left: "9%", width: "68%", height: "13%" },
-                        explanation: "當「測試用」撤回了 2026-06-10 的請假後，後端會主動對原本的代班同仁「蔡一傑」推播一則溫馨通知：「通知：測試用已撤回了 2026-06-10 的請假申請（您當天【不用代班】了）。系統已釋放您的時間...」。",
-                        snippet: `// main.txt - 請假人主動撤回時，發送主動取消通知給代班人\nif (operatorUserId === leaveUserId) {\n  const msgToCover = \`通知：\${leaveUserName} 已撤回了 \${dateStr} 的請假申請（您當天【不用代班】了）。系統已釋放您的時間，祝放假愉快！\`;\n  pushText(coverUserId, msgToCover);\n}`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "「測試用」取消請假後，原本答應幫忙代班的同仁「蔡一傑」什麼都不需要做。他的手機 LINE 會主動收到系統寄出的溫馨免代班通知，告知蔡一傑那一天「不用去代班了」，系統已將蔡一傑的時間釋放出來，可以開心放假！",
+                        interactiveText: "蔡一傑手機接收主動推播：\n「通知：測試用已撤回了 2026-06-10 的請假申請（您當天【不用代班】了）。\n\n系統已釋放您的代班時間，祝放假愉快！」",
+                        interactiveType: "代班人通知推播",
+                        ruleTip: "這正是本系統自主代班機制的強大之處！任何一方取消，另一方都會立刻、精準地收到通知，絕對不會發生資訊不同步、或者白跑一趟公司上工的情況。"
                     }
                 ]
             },
             {
                 id: "sc-warning",
-                title: "Scenario E: 臨時反悔與緊急警報",
+                title: "流程 E：代班人反悔：臨時取消與緊急警報",
                 icon: "fa-triangle-exclamation",
                 color: "amber",
                 steps: [
                     {
                         img: "10.png",
-                        title: "5.1 代班同仁臨時反悔代班",
+                        title: "步驟 5.1 ➔ 代班同仁臨時有事欲取消代班",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-11",
                         hotspot: { top: "35%", left: "9%", width: "82%", height: "8%" },
-                        explanation: "假設代班同仁「蔡一傑」臨時因私人原因無法履行原已答應在 2026-06-11 的代班，他開啟自主異動中心網頁，並勾選作廢「[您的代班] 幫【測試用】代班 (狀態: OK)」此行程。",
-                        snippet: `// index.txt - 代班人蔡一傑在其自主異動中心勾選欲反悔的行程並送出\nconst ids = Array.from(checkboxes).map(cb => cb.value);\n// 送出 cancelSpecificCovers POST 請求到 GAS 後端...`,
-                        snippetLang: "index.txt (LIFF)"
+                        explanation: "若代班人「蔡一傑」原本答應在 2026-06-11 幫「測試用」代班，但臨時家中有急事、當天突然無法履行。這時他同樣可以開啟「自主異動中心」，找到「[您的代班] 幫【測試用】代班」那一列進行勾選取消。",
+                        interactiveText: "蔡一傑進入異動中心：\n「[X] 2026-06-11 - 我代班 (幫【測試用】代班) [OK]」\n點選下方紅色按鈕：【確認撤銷/作廢選取日期】",
+                        interactiveType: "代班人網頁畫面",
+                        ruleTip: "請大家秉持黃光同舟共濟精神，代班若要取消，請務必盡早進行，讓請假同仁能有充足的時間尋找第二個代班人！"
                     },
                     {
                         img: "18.png",
-                        title: "5.2 蔡一傑端完成作廢扣除",
+                        title: "步驟 5.2 ➔ 蔡一傑完成作廢，系統彈窗提示",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-11",
                         hotspot: { top: "45%", left: "21%", width: "58%", height: "20%" },
-                        explanation: "蔡一傑確認取消➔ 後端執行狀態更新改為 'NO'，並從資料庫移除。蔡一傑端手機彈窗「變更成功！排班紀錄已作廢扣除。」",
-                        snippet: `// main.txt - 修改試算表狀態，並偵測到此次異動的撤銷操作人是代班人\nelse if (operatorUserId === coverUserId) {\n  const msgToLeave = \`⚠️ 警報！原定於 \${dateStr} 幫您代班的 \${coverUserName} 因故【臨時無法前往】。該天代班已失效，請您立刻點擊「請假」重新向其他同仁代班！\`;\n  pushText(leaveUserId, msgToLeave);\n}`,
-                        snippetLang: "main.txt (GAS)",
-                        dbAction: {
-                            table: "Leaves",
-                            action: "update",
-                            query: { date: "2026-06-11" },
-                            updateData: { status: "NO" }
-                        }
+                        explanation: "蔡一傑勾選確認取消➔ 網頁彈出提示：『🚨 變更成功！排班紀錄已作廢扣除。』這筆紀錄在雲端正式失效。蔡一傑的手機畫面退回聊天室。",
+                        interactiveText: "網頁確認彈窗：\n「🚨 變更成功！排班紀錄已作廢扣除。系統已在背景同步將 2026-06-11 標註為失效，並對原請假人『測試用』發出緊急失效警報！」",
+                        interactiveType: "網頁完成彈窗",
+                        ruleTip: "代班人取消後，這天在雲端系統上會恢復成「測試用自己值班，沒有代班人」的原始狀態。因此接下來，系統會啟動「防堵缺工警報」！"
                     },
                     {
                         img: "19.png",
-                        title: "5.3 請假同仁收到「緊急失效警報」",
+                        title: "步驟 5.3 ➔ 請假同仁手機驚天一震！收到「緊急失效警報」",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
                         hotspot: { top: "78%", left: "9%", width: "68%", height: "14%" },
-                        explanation: "蔡一傑一撤銷代班，後台即時判定這將導致該天的排班出現漏洞！於是立刻向原請假人「測試用」主動發送一則**黃色三角形緊急失效警報**：「⚠️ 警報！原定於 2026-06-11 幫您代班的蔡一傑因故【臨時無法前往】。該天代班已失效，請您立刻點擊『請假』重新向其他同仁代班！」",
-                        snippet: `// main.txt - 後端在代班人反悔時，對原請假人主動發出黃色警告\nconst msgToLeave = \`⚠️ 警報！原定於 \${dateStr} 幫您代班的 \${coverUserName} 因故【臨時無法前往】。該天代班已失效，請您立刻點擊「請假」重新向其他同仁代班！\`;\npushText(leaveUserId, msgToLeave);`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "蔡一傑取消代班的那一剎那，因為這天又沒有代班人了，請假同仁「測試用」的手機 LINE 會立刻彈出一則極為顯眼、帶有黃色三角警告標誌的**緊急失效警報**！告知測試用原本的代班人反悔了，必須『立刻重新請假、重新找人代班』，避免屆時站台空班遭處分！",
+                        interactiveText: "測試用手機接收警報推播：\n「⚠️ 警報！原定於 2026-06-11 幫您代班的 蔡一傑 因故【臨時無法前往】。\n\n該天代班已失效，請您立刻點擊「請假」按鈕，重新向其他同仁代班！」",
+                        interactiveType: "緊急失效警報推播",
+                        ruleTip: "⚠️ 同仁若收到此緊急通知，代表您該天的請假已不成立，當天您依然有出勤義務。請盡快登入系統重新請假並尋求別的同仁代班！"
                     }
                 ]
             },
             {
                 id: "sc-admin",
-                title: "Scenario F: 主管管理與調組生效",
+                title: "主管與管理員專區：組內統計與調組預約",
                 icon: "fa-sliders",
                 color: "purple",
                 steps: [
                     {
                         img: "13.png",
-                        title: "6.1 系統月度請假與代班排行榜",
+                        title: "步驟 6.1 ➔ 輸入「統計」看本月熱心協助代班排行榜",
                         role: "主管與組員",
                         date: "2026-06-11",
                         hotspot: { top: "51%", left: "10%", width: "64%", height: "25%" },
-                        explanation: "在 LINE 聊天室輸入「統計」➔ 點選主管姓名「湯榮銘」➔ GAS 後端檢索當月所有 OK 的代班數據➔ 渲染並排出湯榮銘組內本月份的代班次數與請假次數排行。",
-                        snippet: `// main.txt - 統計特定 Leader 下組員的當月請假與代班績效排行\nfor (let name in stats) {\n  statsArray.push({ name: name, leaveCount: stats[name].leaveCount, coverCount: stats[name].coverCount });\n}\nstatsArray.sort((a, b) => b.coverCount - a.coverCount);\n// 排列後使用 🥇 🥈 🥉 勳章渲染回傳訊息...`,
-                        snippetLang: "main.txt (GAS)"
+                        explanation: "輸入「統計」➔ 點點擊主管姓名（例：湯榮銘）➔ 機器人會在聊天室立刻渲染出組內同仁在本月份『熱心協助代班』次數與請假次數的龍虎榜！誰是組內的代班之星、熱心好幫手，一清二楚！",
+                        interactiveText: "湯榮銘組別熱心排行回覆：\n「🏆 【 湯榮銘 組別 - 2026年06月 】\n(本月確認代班累計)\n━━━━━━━━━━━━━━━\n🏅 蔡一傑\n  🔹 熱心代班：2 次\n  🔸 請假累計：1 次\n\n-------------------------------」",
+                        interactiveType: "排行統計卡片",
+                        ruleTip: "主管會定期翻看此統計排行榜。多幫忙同仁代班，在主管考核評分中都是相當大的加分亮點喔！多幫人代班，當自己需要請假時同仁也會更願意伸出援手！"
                     },
                     {
                         img: "20.png",
-                        title: "6.2 管理後台主管打包更名",
-                        role: "全區管理員",
+                        title: "步驟 6.2 ➔ 管理後台：主管打包更名轉移",
+                        role: "系統管理員",
                         date: "2026-06-18",
                         hotspot: { top: "18%", left: "6%", width: "88%", height: "45%" },
-                        explanation: "管理員開啟管理後台頁面➔ 提供主管一鍵打包更名專區、以及以 Chart.js 繪製「團隊整體績效（By Leader 總請假/總代班）」之直條圖，隨時掌握團隊各部門的人力負載狀況。",
-                        snippet: `// index.txt - Chart.js 團隊整體績效圖表繪製\nglobalLeaderChart = new Chart(ctx, {\n  type: 'bar',\n  data: {\n    labels: labels,\n    datasets: [\n      { label: '請假總次數', data: leaveData, backgroundColor: '#FFA1B2' },\n      { label: '協助代班總次數', data: coverData, backgroundColor: '#B2E2A2' }\n    ]\n  }\n});`,
-                        snippetLang: "index.txt (LIFF)"
+                        explanation: "這部分是管理員專屬的後台網頁（`?page=admin`）。管理員可在此進行主管「一鍵整批更名」。例如某主管調離職務或升遷，在後台選取後，底下的組員便能整批打包移轉到新主管名下。同時也能觀看全公司直條圖統計分析。",
+                        interactiveText: "管理後台主管更名功能：\n【組織 Leader 名稱異動專區】：\n1. 選擇舊主管：洪偉智\n2. 輸入新姓名：林志強\n👉 [ 執行一鍵全組更名轉移 ]\n(雲端在背景將所有洪偉智的組員全自動轉移給林志強)",
+                        interactiveType: "管理後台網頁",
+                        ruleTip: "此功能是為了解決組織異動時繁複的對調工作，同仁不需重新填寫註冊，管理員一鍵就可幫大家轉移完成！"
                     },
                     {
                         img: "21.png",
-                        title: "6.3 組員調組移轉與預約未來生效",
-                        role: "全區管理員",
+                        title: "步驟 6.3 ➔ 管理後台：組員調組與預約未來生效",
+                        role: "系統管理員",
                         date: "2026-06-18",
                         hotspot: { top: "68%", left: "6%", width: "88%", height: "28%" },
-                        explanation: "後台列出指定組別成員，以橫向 Chart.js 分析其細緻人力負擔➔ 點擊組員蔡一傑➔ 可選擇將其更換 Leader（例：江亞承組），並支援設定未來的生效日期 (2026-06-18)。設定後會寫入試算表，等時間到達生效日，GAS 排程將會自動生效移轉並強制清理原組代班。",
-                        snippet: `// main.txt - 處理組員更換主管之調動與未來預約生效寫入邏輯\nif (effectiveDateStr && effectiveDateStr > todayStr) {\n  userSheet.getRange(userRowIndex, 5).setValue(newLeader);\n  userSheet.getRange(userRowIndex, 6).setValue(effectiveDateStr);\n  return createPostResponse({ status: 'success', message: \`已成功預約！...\` });\n}`,
-                        snippetLang: "main.txt (GAS)",
-                        dbAction: {
-                            table: "users",
-                            action: "update",
-                            query: { name: "蔡一傑" },
-                            updateData: { schedLeader: "江亞承", schedDate: "2026-06-18" }
-                        }
+                        explanation: "若個別同仁發生調組（例如蔡一傑即將調去江亞承組），管理員可以直接選取蔡一傑，並填寫『未來的調職生效日期 (例如: 2026-06-18)』。設定好後送出預約，雲端排程會在當天半夜自動生效，並「強制清理他原組別未來的代班表並寄發請假人警報」，杜絕跨組管理的漏洞！",
+                        interactiveText: "調組移轉預約功能：\n【組員】：蔡一傑\n【1. 變更 Leader 為】：江亞承\n【2. 預定生效日期】：2026-06-18\n👉 [ 確認變更 / 提交預約 ]",
+                        interactiveType: "管理後台網頁",
+                        ruleTip: "調職時最怕把過去答應原組的代班行程帶走，導致原組開天窗！系統在生效日會自動清理預約，並對原組請假人發出失效警報，提醒原同仁重新找人。"
                     }
                 ]
             }
         ];
 
         // ==========================================
-        // 2. 模擬 Google Sheets 初始資料庫狀態
+        // 2. 模擬 Google Sheets 初始資料庫狀態 (維持原數值)
         // ==========================================
         let mock_db_users = [
             { id: "U001", name: "王小明", leader: "洪偉智", status: "已完成", schedLeader: "", schedDate: "" },
@@ -568,23 +567,21 @@
             { name: "潘承陽" }
         ];
 
-        // 複製一份作為重置備份
+        // 備份作為重置用
         const backup_users = JSON.stringify(mock_db_users);
         const backup_leaves = JSON.stringify(mock_db_leaves);
         const backup_config_org = JSON.stringify(mock_db_config_org);
 
-        // 當前互動狀態
         let currentScenarioIdx = 0;
         let currentStepIdx = 0;
         let activeTableTab = "users";
 
         // ==========================================
-        // 3. 系統初始化與渲染
+        // 3. 生命週期初始化
         // ==========================================
         window.onload = function() {
             renderScenariosMenu();
             loadStep(0, 0);
-            updateSimDateDisplay();
         };
 
         function resetMockDb() {
@@ -616,7 +613,7 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <p class="text-xs tracking-wide leading-tight">${sc.title}</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5 font-normal">${sc.steps.length} 個主要步驟圖</p>
+                            <p class="text-[10px] text-slate-500 mt-1 font-normal">${sc.steps.length} 個步驟教學</p>
                         </div>
                     </button>
                 `;
@@ -624,12 +621,12 @@
         }
 
         // ==========================================
-        // 4. 步進控制與渲染引擎
+        // 4. 步驟流程控制
         // ==========================================
         function selectScenario(scIdx) {
             currentScenarioIdx = scIdx;
             currentStepIdx = 0;
-            resetMockDb(); // 切換場景時重置資料庫，保持每個演示流程乾淨
+            resetMockDb(); // 切換時自動重置模擬數據
             renderScenariosMenu();
             loadStep(scIdx, 0);
         }
@@ -638,48 +635,46 @@
             const scenario = SCENARIOS[scIdx];
             const step = scenario.steps[stepIdx];
 
-            // 1. 更新計數器與按鈕狀態
+            // 1. 更新按鈕可用狀態
             document.getElementById('step-counter').innerText = `${stepIdx + 1} / ${scenario.steps.length}`;
             document.getElementById('prev-btn').disabled = stepIdx === 0;
             document.getElementById('next-btn').disabled = stepIdx === scenario.steps.length - 1;
 
-            // 2. 載入圖片與安全備用
+            // 2. 顯示真實截圖
             const imgEl = document.getElementById('phone-screenshot');
             const fallbackEl = document.getElementById('fallback-mockup');
             
             imgEl.src = step.img;
-            document.getElementById('fallback-filename').innerText = `檔案：${step.img}`;
+            document.getElementById('fallback-filename').innerText = `檔案名稱：${step.img}`;
             
-            // 設定替代文字內容以防使用者圖片沒在同目錄
             const mockupText = getFallbackMockupDescription(step.img);
             fallbackEl.querySelector('div').innerText = mockupText;
 
             imgEl.onload = function() {
                 fallbackEl.classList.add('hidden');
                 imgEl.classList.remove('hidden');
-                // 圖片載入成功後，繪製聚光燈焦點框
                 drawHotspot(step.hotspot);
             };
 
             imgEl.onerror = function() {
                 imgEl.classList.add('hidden');
                 fallbackEl.classList.remove('hidden');
-                // 隱藏焦點框
                 document.getElementById('hotspot-overlay').classList.add('hidden');
             };
 
-            // 3. 渲染技術解析面板
-            document.getElementById('step-role-badge').innerText = `角色：${step.role}`;
-            document.getElementById('step-explanation').innerHTML = `<i class="fa-solid fa-circle-info text-cyan-400 mr-1.5"></i>${step.explanation}`;
-            document.getElementById('code-snippet-display').innerText = step.snippet;
-            document.getElementById('code-lang-label').innerText = step.snippetLang;
+            // 3. 填入組員導向文字與 LINE 對話對照
+            document.getElementById('step-role-badge').innerText = `目前身分：${step.role}`;
+            document.getElementById('step-explanation').innerHTML = `<i class="fa-solid fa-circle-info text-emerald-400 mr-1.5"></i>${step.explanation}`;
+            document.getElementById('interactive-text-display').innerText = step.interactiveText;
+            document.getElementById('interactive-type-label').innerText = step.interactiveType;
+            document.getElementById('step-rule-tip').innerText = step.ruleTip;
 
-            // 4. 模擬執行資料庫異動寫入
+            // 4. 模擬資料庫對應更迭
             if (step.dbAction) {
                 executeMockDbAction(step.dbAction);
             }
 
-            // 5. 觸發 LINE Push 通知 Toast
+            // 5. 模擬手機主動推播聲響與彈出 Toast
             triggerLINEPushNotification(step);
 
             updateSimDateDisplay();
@@ -701,7 +696,7 @@
             }
         }
 
-        // 繪製對應圖片的紅框聚焦定位點
+        // 在圖片上繪製高脈衝聚焦綠色框
         function drawHotspot(rect) {
             const overlay = document.getElementById('hotspot-overlay');
             if (rect) {
@@ -721,15 +716,14 @@
         function triggerLINEPushNotification(step) {
             const toast = document.getElementById('sim-toast');
             
-            // 只在「代班人收到卡片」、「請假人收到OK」、「請假人收到拒絕」與「警報通知」等關鍵 PUSH 步驟彈出 Toast
+            // 關鍵主動推播時，彈出 Toast 通知同仁
             if (step.img === "14.png" || step.img === "06.png" || step.img === "08.png" || step.img === "16.jpg" || step.img === "19.png") {
-                document.getElementById('toast-msg').innerText = step.title + " (主動推播)";
+                document.getElementById('toast-msg').innerText = step.title;
                 document.getElementById('toast-time').innerText = "11:18";
                 
-                // 滑出 Toast
                 toast.style.transform = "translateX(0px)";
                 
-                // 5秒後自動收回
+                // 5秒後收回
                 setTimeout(() => {
                     hidePushToast();
                 }, 5000);
@@ -743,7 +737,7 @@
         }
 
         // ==========================================
-        // 6. 模擬資料庫寫入核心 (Mock Database Controller)
+        // 6. 模擬資料庫背景同步
         // ==========================================
         function executeMockDbAction(dbAct) {
             if (dbAct.table === "users") {
@@ -762,12 +756,10 @@
                     const exists = mock_db_leaves.some(l => l.recordId === dbAct.data.recordId || (l.date === dbAct.data.date && l.applyName === dbAct.data.applyName && l.status !== "NO"));
                     if (!exists) mock_db_leaves.push(dbAct.data);
                 } else if (dbAct.action === "update") {
-                    // 若有明確 query
                     if (dbAct.query.recordId) {
                         const record = mock_db_leaves.find(l => l.recordId === dbAct.query.recordId);
                         if (record) Object.assign(record, dbAct.updateData);
                     } else if (dbAct.query.date) {
-                        // 依日期查詢 (作廢)
                         const record = mock_db_leaves.find(l => l.date === dbAct.query.date && l.status === "OK");
                         if (record) Object.assign(record, dbAct.updateData);
                     }
@@ -797,12 +789,12 @@
                 table.innerHTML = `
                     <thead class="bg-slate-900 text-slate-400 sticky top-0 border-b border-slate-800">
                         <tr>
-                            <th class="p-2.5">LINE_User_ID</th>
-                            <th class="p-2.5">真實姓名</th>
-                            <th class="p-2.5">所屬主管</th>
-                            <th class="p-2.5">註冊狀態</th>
-                            <th class="p-2.5">預約主管</th>
-                            <th class="p-2.5">生效日期</th>
+                            <th class="p-2.5">系統登錄 ID</th>
+                            <th class="p-2.5">同仁真實姓名</th>
+                            <th class="p-2.5">所屬主管組別</th>
+                            <th class="p-2.5">註冊綁定狀態</th>
+                            <th class="p-2.5">預約轉移主管</th>
+                            <th class="p-2.5">預約調動生效日</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-900/60 text-slate-300">
@@ -825,19 +817,19 @@
                 table.innerHTML = `
                     <thead class="bg-slate-900 text-slate-400 sticky top-0 border-b border-slate-800">
                         <tr>
-                            <th class="p-2.5">Record_ID</th>
-                            <th class="p-2.5">請假人</th>
+                            <th class="p-2.5">流水號</th>
+                            <th class="p-2.5">請假申請人</th>
                             <th class="p-2.5">請假日期</th>
-                            <th class="p-2.5">代班人</th>
-                            <th class="p-2.5">狀態</th>
+                            <th class="p-2.5">代班協助同仁</th>
+                            <th class="p-2.5">假單確認狀態</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-900/60 text-slate-300">
                         ${mock_db_leaves.map(l => {
                             let badge = "";
-                            if (l.status === "OK") badge = `<span class="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded text-[9px] font-bold">OK</span>`;
-                            else if (l.status === "NO") badge = `<span class="px-1.5 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded text-[9px] font-bold">NO</span>`;
-                            else badge = `<span class="px-1.5 py-0.5 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded text-[9px] font-bold">待確認</span>`;
+                            if (l.status === "OK") badge = `<span class="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded text-[9px] font-bold">已確認成立</span>`;
+                            else if (l.status === "NO") badge = `<span class="px-1.5 py-0.5 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded text-[9px] font-bold">已退回/撤銷</span>`;
+                            else badge = `<span class="px-1.5 py-0.5 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded text-[9px] font-bold">等待代班確認</span>`;
                             
                             return `
                                 <tr class="hover:bg-slate-900/40 transition-colors">
@@ -856,14 +848,14 @@
                 table.innerHTML = `
                     <thead class="bg-slate-900 text-slate-400 sticky top-0 border-b border-slate-800">
                         <tr>
-                            <th class="p-2.5">組織主管名稱 (Config_Org)</th>
+                            <th class="p-2.5">現任黃光組別主管名稱 (Config_Org)</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-900/60 text-slate-300">
                         ${mock_db_config_org.map(o => `
                             <tr class="hover:bg-slate-900/40 transition-colors">
                                 <td class="p-2.5 text-white font-semibold flex items-center gap-2">
-                                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> ${o.name}
+                                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span> 主管：${o.name}
                                 </td>
                             </tr>
                         `).join('')}
@@ -873,190 +865,34 @@
         }
 
         // ==========================================
-        // 7. 當圖片不存在同資料夾時之精美描述替代函式
+        // 7. 當圖片不存在時之精美描述替代函式 (備用)
         // ==========================================
         function getFallbackMockupDescription(filename) {
             const descriptions = {
-                "QR.png": "【LINE 官方帳號加入畫面】\nBot basic ID: @051yicar\n畫面上方顯示「Bot information」，中央有大張的 LINE 加入好友專用二維條碼 QR Code，下方配有英文說明「Scan this QR code with LINE to add your LINE Official Account as a friend.」",
-                "01.png": "【LINE 聊天室 - 指令說明回覆】\n同仁發送訊息：『說明』\n黃光請假機器人回覆精美卡片：\n『🎉 歡迎使用排班系統！\n⚙️ 指令選單：\n👤 【 註冊 】：綁定姓名與 Leader。\n📅 【 請假 】：發起代班申請。\n鍵盤輸入【 查詢 】：未來排班總覽。\n📊 【 統計 】：即時月度報告。』",
-                "02.png": "【LINE 聊天室 - 一次性帳號綁定註冊】\n1. 同仁發送：『註冊』\n2. 機器人回覆：『歡迎使用排班系統！請直接回覆您的【真實姓名】』\n3. 同仁回覆：『測試用』\n4. 機器人發送選單範本：『確認姓名為【測試用】，請點選所屬 Leader』，列出主管選項「湯榮銘、洪偉智、江亞承、潘承陽」\n5. 同仁點選「洪偉智」後➔ 機器人回覆：『🎉 註冊成功！姓名：測試用，Leader：洪偉智。現在您可以輸入「請假」發起代班申請。』",
-                "03.png": "【LINE 聊天室 - 請假申請觸發】\n同仁發送訊息：『請假』\n黃光請假機器人回覆按鈕範本卡片：\n『請點擊按鈕開啟申請網頁：』\n下方有深藍色文字的超連結按鈕『填寫請假代班』",
-                "04.png": "【LIFF 請假申請表單頁面】\n顯示標題：『排班請假申請』\n1. 請假同仁：綠色粗體字顯示自動帶入的『測試用』\n2. 選擇請假日期：下拉日期選擇，顯示已選定『2026/06/10』\n3. 第一步：選擇代班人的 Leader，下拉顯示已選定『湯榮銘』\n4. 第二步：選擇代班同仁，下拉顯示已篩選出的『蔡一傑』\n5. 底部有顯眼的綠色按鈕：『送出請假申請』",
-                "05.png": "【LIFF 申請提交成功彈窗】\n於請假表單頁面上方彈出帶有網域名稱「paultsai1011.github.io」的網頁對話框。\n顯示一則通知：『🎉 申請成功！已通知代班同仁。』\n下方配有單一『確定』按鈕，按下後網頁即自動關閉，返回 LINE 聊天室。",
-                "06.png": "【LINE 聊天室 - 請假人接收確認推播】\n黃光請假機器人主動推播一則訊息至請假同仁「測試用」手機聊天室中：\n『👍 好消息！蔡一傑已同意在 2026-06-10 幫您代班！\n試算表狀態已更新為【OK】。』\n發送時間為 上午 11:19。",
-                "07.png": "【LIFF 請假重複防呆攔截】\n使用者在已請假過 2026-06-10 的情況下，再次開啟請假表單並選取同日送出，表單會彈出黃色警告標誌：\n『⚠️ 申請攔截：您在 2026-06-10 這天已經有申請紀錄了 (狀態: OK)，請勿重複送出！』\n阻擋送出操作，防止重複寫入資料庫。",
-                "08.png": "【LINE 聊天室 - 請假人接收拒絕推播】\n當代班人「蔡一傑」按下無法代班後，系統對請假同仁主動推播一則警告訊息：\n『❌ 嗶嗶！蔡一傑已【拒絕】您在 2026-06-24 的代班請求。\n請您點擊「請假」重新向其他同仁代班！』\n發送時間為 上午 11:20。",
-                "09.png": "【LINE 聊天室 - 綜合排班與異動查詢】\n同仁輸入：『查詢』\n機器人整合回覆未來明細卡片：\n『📊 【您的未來排班異動總覽】\n📤 1. 您發起的請假申請：\n  1. 日期: 2026-06-10\n     代班同仁: 蔡一傑 (OK)\n  2. 日期: 2026-06-11\n     代班同仁: 蔡一傑 (OK)\n  3. 日期: 2026-06-29\n     代班同仁: 蔡一傑 (OK)\n📥 2. 您答應的代班行程：\n  1. 日期: 2026-06-09\n     對象: 幫【蔡一傑】代班\n━━━━━━━━━━━━━━━\n💡 若欲撤銷請假或特定代班天數，請直接點擊下方按鈕進入中心操作。』\n下方配有兩個網頁超連結按鈕：『📅 新增請假代班申請』、『🚨 進入自主異動中心 (撤回/取消)』",
-                "10.png": "【LIFF 排班自主異動中心頁面】\n網頁標題：『排班自主異動中心』\n上方燈泡提示：『💡 請勾選您欲作廢的未來日期（撤回您的請假，或取消您答應的代班），系統將精準移除該天並自動通知對方同仁：』\n下方條列未來行程列表供勾選：\n⬜ 📅 2026-06-11 - 📤 [您的請假]\n    由【蔡一傑】代班 (狀態: OK)\n⬜ 📅 2026-06-09 - 📥 [您的代班]\n    幫【蔡一傑】代班 (狀態: OK)\n⬜ 📅 2026-06-29 - 📤 [您的請假]\n    由【蔡一傑】代班 (狀態: OK)\n⬜ 📅 2026-06-10 - 📤 [您的請假]\n    由【蔡一傑】代班 (狀態: OK)\n底部有鮮紅色的巨大功能按鈕：『確認撤銷/作廢選取日期』",
-                "11.png": "【LIFF 自主作廢二次確認確認彈窗】\n同仁勾選欲作廢的排班日期後，點選作廢，網頁彈出二次確定對話方塊：\n『確定要將勾選日期的排班紀錄作廢移除嗎？』\n提供『取消』與『確定』按鈕，加強變更前的安全防護。",
-                "12.png": "【LIFF 自主作廢成功彈窗】\n按下確定後，系統處理完畢，網頁彈出紅色警告符號確認通知：\n『🚨 變更成功！排班紀錄已作廢扣除。』\n並提供單一『確定』按鈕，按下後自動關閉網頁返回 LINE。",
-                "13.png": "【LINE 聊天室 - 組內即時數據統計】\n1. 同仁輸入：『統計』\n2. 機器人回覆：『請選擇 Leader 計算組內成員次數』，列出主管選項「湯榮銘、洪偉智、江亞承、潘承陽」\n3. 同仁點選「湯榮銘」後➔ 機器人統計並回覆績效排行榜：\n『🏆 【湯榮銘 組別 - 2026 年 06 月 】\n(有效確認代班)\n━━━━━━━━━━━━━━━\n🏅 蔡一傑\n  🔹 代班：2 次\n  🔸 請假：1 次\n-------------------------------』",
-                "14.png": "【代班人手機 - LINE Flex Message 審核卡片】\n代班同仁「蔡一傑」的手機 LINE 收到精美的滿版 Flex Message 卡片：\n1. 卡片上方：黃色手掌標誌與藍色粗體大字『✋ 代班請求通知』\n2. 卡片中央：『測試用 請求您在 2026-06-10 協助代班。』\n3. 卡片底部：橫向併排兩個顯眼的亮色決策按鈕：綠色的『同意代班』與紅色的『無法代班』",
-                "15.jpg": "【代班人手機 - 無法代班點選回饋】\n代班人點擊紅色『無法代班』按鈕後，機器人在蔡一傑手機上回覆一則文字訊息：\n『已幫您回報無法代班，系統將自動通知原請假同仁。』\n告知已成功向後台提報，並自其聊天卡片中登出。",
-                "16.jpg": "【代班人手機 - 請假人撤回 ➔ 溫馨釋放通知】\n當請假人「測試用」自主取消 2026-06-10 的請假時，代班人蔡一傑的手機聊天室會主動收到一則溫馨提醒：\n『通知：測試用 已撤回了 2026-06-10 的請假申請（您當天【不用代班】了）。系統已釋放您的時間，祝放假愉快！』\n發送時間為 上午 11:22。",
-                "17.jpg": "【代班人手機 - 同意代班點選回饋】\n代班人點選綠色『同意代班』按鈕後，機器人在蔡一傑手機上回覆一則訊息：\n『確認成功！感謝您協助代班。\n若後續有需要變更，可點擊下方按鈕進入「排班自主異動中心」進行勾選取消。』\n並同時發送一個紅色的 Flex Message 按鈕：『🚨 進入異動中心』",
-                "18.png": "【LIFF 代班人反悔作廢代班行程】\n代班人蔡一傑在其異動中心，勾選了「[您的代班] 幫【測試用1】代班」行程，點擊紅色按鈕後，網頁彈出扣除成功提示：\n『🚨 變更成功！排班紀錄已作廢扣除。』",
-                "19.png": "【LINE 聊天室 - 代班人臨時反悔 ➔ 請假人緊急警告】\n當代班人蔡一傑主動作廢其代班後，請假人「測試用」立刻在 LINE 收到一則黃色驚嘆號標誌之主動 Push Notification 警報：\n『⚠️ 警報！原定於 2026-06-11 幫您代班的 蔡一傑 因故【臨時無法前往】。該天代班已失效，請您立刻點擊「請假」重新向其他同仁代班！』",
-                "20.png": "【LIFF 團隊排班管理後台 - 主管更名專區】\n網頁標題：『📊 團隊排班管理後台』\n1. 上方藍色虛線區塊為『✏️ 組織 Leader 名稱異動專區』，顯示說明可用於主管打包更名轉移。提供下拉選擇舊 Leader『洪偉智』，以及『請輸入新姓名』輸入框，下方按鈕『執行一鍵全組更名轉移』\n2. 下方為『🏆 團隊整體績效 (By Leader 加總)』的 Chart.js 直條圖。顯示 X 軸為湯榮銘、洪偉智、江亞承、潘承陽；Y 軸為請假/代班次數。圖表中以紅色/綠色代表各組的統計數值。",
-                "21.png": "【LIFF 團隊排班管理後台 - 調組移轉預約專區】\n後台下方專區：\n1. 提供下拉選單，篩選欲檢視的 Leader 組別成員：選取『湯榮銘』\n2. 橫向 Chart.js 圖表：『📊 【湯榮銘】組內同仁負載細緻分析』。顯示蔡一傑的個人請假（紅色橫條）與個人代班（藍綠色橫條）\n3. 下方顯示選取組員的詳細異動：『成員姓名：蔡一傑 (目前所屬: 湯榮銘)』\n   ➔ 1. 預計變更 Leader 為：下拉選取『湯榮銘』\n   ➔ 2. 選擇生效日期 (留空代表立即生效)：日期輸入框，顯示已預約設定為『2026/06/18』\n   ➔ 底部按鈕：『確認變更 / 提交預約』"
+                "QR.png": "【LINE 官方帳號加入畫面】\nID 帳號: @051yicar\n畫面上方顯示「黃光請假機器人」的基本資訊，中央提供加好友專用的 LINE QR Code 條碼。",
+                "01.png": "【LINE 聊天室 - 指令說明回覆】\n同仁輸入：『說明』\n機器人回覆系統的四個主要指令格式與對應用途說明卡片。",
+                "02.png": "【LINE 聊天室 - 同仁個人資料登錄】\n同仁輸入：『註冊』，打上姓名並點選您的所屬 Leader，完成首次快速登記綁定。",
+                "03.png": "【LINE 聊天室 - 開啟請假申請表入口】\n同仁輸入：『請假』，機器人給予綠色的網頁入口卡片，點選按鈕『填寫請假代班』即可免帳密登入網頁。",
+                "04.png": "【請假申請 LIFF 網頁表單】\n自動帶入同仁姓名，同仁自行下拉點選請假日期、代班同仁的主管、與代班協助人的姓名下拉選單。",
+                "05.png": "【LIFF 網頁 - 申請成功送出彈窗】\n網頁跳出提示：『🎉 申請成功！已通知代班同仁。』，點選確認自動關閉，代班人將在 LINE 接收審核通知。",
+                "06.png": "【LINE 聊天室 - 恭喜代班成功通知】\n請假人手機收到系統推播：『👍 好消息！蔡一傑已同意在 2026-06-10 幫您代班！試算表狀態已正式生效OK。』",
+                "07.png": "【LIFF 網頁 - 重複請假防呆阻擋】\n同仁若重複對同天提出請假，送出時會彈出警告『⚠️ 申請攔截：您在該日期已有申請紀錄...』，保護資料庫防呆。",
+                "08.png": "【LINE 聊天室 - 代班人拒絕警報】\n若代班人按了無法幫忙，請假人手機收到通知：『❌ 嗶嗶！蔡一傑已【拒絕】您的代班請求，請另覓人選。』",
+                "09.png": "【LINE 聊天室 - 個人未來行程綜合查詢】\n鍵盤輸入『查詢』，機器人分門別類條列出您未來『我發起的請假』與『我答應的代班』行程表，並附帶異動中心入口連結。",
+                "10.png": "【LIFF 網頁 - 排班自主異動中心】\n網頁上清楚條列出您未來所有排定行程，同仁可在各行前方勾選並進行一鍵作廢移除。",
+                "11.png": "【LIFF 網頁 - 自主作廢二次確認框】\n點選作廢後，彈窗確認『確定要將勾選日期的排班紀錄作廢移除嗎？』，提供雙重防護防手滑。",
+                "12.png": "【LIFF 網頁 - 取消成功完成扣除】\n作廢完畢彈窗『🚨 變更成功！排班紀錄已作廢扣除。』，背景資料已重置更新。",
+                "13.png": "【LINE 聊天室 - 統計排行榜】\n輸入『統計』並選主管姓名，機器人吐出當月全組熱心代班同仁的次數金銀銅龍虎排行榜。",
+                "14.png": "【代班人手機 - LINE 審核 Flex 卡片】\n代班同仁蔡一傑手機收到大張綠色按鈕卡片，可直接點選『同意幫忙』或『無法代班』進行決策回報。",
+                "15.jpg": "【代班人手機 - 按下無法代班的回饋】\n蔡一傑按紅色按鈕後，回覆『已幫您回報無法代班，系統將自動通知原請假同仁。』",
+                "16.jpg": "【代班人手機 - 請假人自主取消 ➔ 溫馨免代班通知】\n當請假人撤回假單，原代班人蔡一傑收到推播：『通知：測試用已撤回了請假（您當天【不用代班】了），祝放假愉快！』",
+                "17.jpg": "【代班人手機 - 按下同意代班的回饋】\n蔡一傑按下同意後，回覆『確認成功！感謝協助代班』，並附帶異動中心按鈕，告知事後反悔亦可進入取消。",
+                "18.png": "【代班人手機 - 自主異動反悔成功】\n蔡一傑在異動中心退回代班後，手機彈窗確認作廢提示『變更成功！排班紀錄已作廢扣除。』",
+                "19.png": "【LINE 聊天室 - 代班人臨時反悔 ➔ 請假人緊急失效警報】\n代班人一退回，請假人LINE主動彈出高強度警報：『⚠️ 警報！代班人蔡一傑因故臨時無法前往，該代班已失效，請您立刻重新請假！』",
+                "20.png": "【LIFF 網頁 - 管理後台更名打包】\n主管打包轉移更名專區，以及用 Chart.js 繪製的公司團隊整體假單、代班負載分析直條圖。",
+                "21.png": "【LIFF 網頁 - 後台組員調組預約生效】\n可觀看組內細部負載分析，並選定組員設定他新 Leader 與「預約未來的自動生效調組日期」，系統定時器屆時會自動安全轉換。"
             };
             return descriptions[filename] || "無對應檔案描述。";
-        }
-
-        // ==========================================
-        // 8. 模擬 Chart.js 儀表板繪製
-        // ==========================================
-        let perfChart = null;
-        let memberChart = null;
-
-        function initCharts() {
-            // 圖表 1: 團隊整體績效 (By Leader)
-            const ctxLeader = document.getElementById('chart-leader-perf').getContext('2d');
-            perfChart = new Chart(ctxLeader, {
-                type: 'bar',
-                data: getLeaderPerfData(),
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { labels: { color: '#94a3b8', font: { size: 9 } } }
-                    },
-                    scales: {
-                        x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', font: { size: 9 } } },
-                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', stepSize: 1 } }
-                    }
-                }
-            });
-
-            // 圖表 2: 組內同仁負擔分析
-            populateLeaderFilter();
-            const ctxMember = document.getElementById('chart-member-load').getContext('2d');
-            memberChart = new Chart(ctxMember, {
-                type: 'bar',
-                data: getMemberLoadData(),
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { labels: { color: '#94a3b8', font: { size: 9 } } }
-                    },
-                    scales: {
-                        x: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', stepSize: 1 } },
-                        y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8', font: { size: 9 } } }
-                    }
-                }
-            });
-        }
-
-        function updateCharts() {
-            if (perfChart) {
-                perfChart.data = getLeaderPerfData();
-                perfChart.update();
-            }
-            renderMemberLoadChart();
-        }
-
-        function renderMemberLoadChart() {
-            if (memberChart) {
-                memberChart.data = getMemberLoadData();
-                memberChart.update();
-            }
-        }
-
-        function populateLeaderFilter() {
-            const filter = document.getElementById('chart-leader-filter');
-            filter.innerHTML = mock_db_config_org.map(o => `<option value="${o.name}">${o.name}</option>`).join('');
-        }
-
-        function getLeaderPerfData() {
-            const labels = mock_db_config_org.map(o => o.name);
-            const leaves = [];
-            const covers = [];
-
-            labels.forEach(leader => {
-                const mNames = mock_db_users.filter(u => u.leader === leader).map(u => u.name);
-                const lCount = mock_db_leaves.filter(l => mNames.includes(l.applyName) && l.status === "OK").length;
-                const cCount = mock_db_leaves.filter(l => mNames.includes(l.coverName) && l.status === "OK").length;
-                leaves.push(lCount);
-                covers.push(cCount);
-            });
-
-            return {
-                labels: labels,
-                datasets: [
-                    { label: '請假次數', data: leaves, backgroundColor: 'rgba(239, 68, 68, 0.7)' },
-                    { label: '協助代班', data: covers, backgroundColor: 'rgba(16, 185, 129, 0.7)' }
-                ]
-            };
-        }
-
-        function getMemberLoadData() {
-            const filterLeader = document.getElementById('chart-leader-filter')?.value || "湯榮銘";
-            const members = mock_db_users.filter(u => u.leader === filterLeader);
-            
-            const labels = members.map(m => m.name);
-            const leaves = [];
-            const covers = [];
-
-            members.forEach(u => {
-                const lCount = mock_db_leaves.filter(l => l.applyName === u.name && l.status === "OK").length;
-                const cCount = mock_db_leaves.filter(l => l.coverName === u.name && l.status === "OK").length;
-                leaves.push(lCount);
-                covers.push(cCount);
-            });
-
-            return {
-                labels: labels,
-                datasets: [
-                    { label: '個人請假', data: leaves, backgroundColor: 'rgba(239, 68, 68, 0.7)' },
-                    { label: '個人代班', data: covers, backgroundColor: 'rgba(56, 189, 248, 0.7)' }
-                ]
-            };
-        }
-
-        // ==========================================
-        // 9. 生效調組測試與模擬時間前進功能 (Time Travel)
-        // ==========================================
-        function timeTravelOneDay() {
-            const simDateEl = document.getElementById('current-sim-date');
-            let dateStr = document.getElementById('sim-date').innerText;
-            
-            const dateParts = dateStr.split('-');
-            let d = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-            d.setDate(d.getDate() + 1);
-            
-            const newDateStr = d.toISOString().split('T')[0];
-            document.getElementById('sim-date').innerText = newDateStr;
-
-            // 檢查預約排程生效
-            let hasActivated = false;
-            mock_db_users.forEach(u => {
-                if (u.schedDate && u.schedDate <= newDateStr && u.schedLeader) {
-                    const oldLeader = u.leader;
-                    u.leader = u.schedLeader;
-                    u.schedLeader = "";
-                    u.schedDate = "";
-                    hasActivated = true;
-                    
-                    // 自動強制清理在原組未來的代班
-                    mock_db_leaves.forEach(l => {
-                        if (l.coverName === u.name && l.status === "OK" && l.date >= newDateStr) {
-                            const originalRequester = mock_db_users.find(usr => usr.name === l.applyName);
-                            if (originalRequester && originalRequester.leader === oldLeader) {
-                                l.status = "NO";
-                            }
-                        }
-                    });
-                }
-            });
-
-            if (hasActivated) {
-                alert(`⏰ 排程模擬觸發：\n今日到達調組預約生效日！組員蔡一傑已自動移轉至江亞承組，並已強制清除其未來在湯榮銘組別之代班排班！`);
-            }
-
-            renderTable();
-            updateCharts();
         }
 
     </script>
