@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700;900&display=swap');
         body {
             font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
@@ -20,20 +20,10 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* 脈衝呼吸定位圈效果 */
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 0.4; }
-            100% { transform: scale(0.95); opacity: 0.8; }
-        }
-        .focus-pulse {
-            animation: pulse-ring 2s infinite ease-in-out;
-        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 
-    <!-- 頂部標題列 -->
     <header class="bg-slate-900/90 border-b border-slate-800/80 sticky top-0 z-40 backdrop-blur-md px-6 py-4 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center space-x-3">
             <div class="bg-emerald-500 text-slate-950 font-black p-2 rounded-xl text-md tracking-wider flex items-center justify-center">
@@ -80,7 +70,6 @@
             </div>
         </section>
 
-        <!-- 中央：手機模擬器與截圖定位焦點 (佔 4 欄) -->
         <section class="xl:col-span-4 flex flex-col items-center justify-start">
             <div class="relative w-[345px] h-[710px] bg-slate-950 rounded-[48px] p-3 shadow-2xl border-[10px] border-slate-800/90 ring-4 ring-slate-800/30 flex flex-col overflow-hidden transition-all duration-300">
                 
@@ -100,21 +89,13 @@
                     </div>
                 </div>
 
-                <!-- 手機顯示畫面主體 -->
+                <!-- 手機顯示畫面主體 (徹底移除定位圈標記，重回 object-contain 舒適美觀) -->
                 <div class="w-full h-full rounded-[38px] overflow-hidden bg-slate-900 flex flex-col relative pt-7">
                     
-                    <!-- 圖片容器與定位框 -->
-                    <div class="relative w-full h-full flex items-center justify-center bg-slate-950 group">
-                        <!-- ⚠️ 將 object-contain 改為 object-fill 確保完美填滿手機框，百分比定位絕不飘移 -->
-                        <img id="phone-screenshot" src="" alt="Screenshot" class="w-full h-full object-fill select-none transition-all duration-200">
-                        
-                        <!-- 動態定位脈衝圈 (Focus Hotspot) -->
-                        <div id="hotspot-overlay" class="absolute border-2 border-emerald-400 rounded-xl pointer-events-none hidden" style="box-shadow: 0 0 15px rgba(52, 211, 153, 0.6)">
-                            <div class="absolute -inset-1.5 border-2 border-emerald-400 rounded-xl focus-pulse"></div>
-                            <span class="absolute -top-6 left-0 bg-emerald-600 text-slate-950 text-[10px] font-black px-1.5 py-0.5 rounded shadow-md whitespace-nowrap" id="hotspot-label">
-                                請看此處操作
-                            </span>
-                        </div>
+                    <!-- 圖片容器 -->
+                    <div class="relative w-full h-full flex items-center justify-center bg-slate-950">
+                        <!-- 恢復為 object-contain，還原最真實的手機截圖畫面 -->
+                        <img id="phone-screenshot" src="" alt="Screenshot" class="w-full h-full object-contain select-none transition-all duration-200">
 
                         <!-- 圖片載入失敗時的精美替代圖 (Failover Mockup) -->
                         <div id="fallback-mockup" class="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center p-6 text-center hidden">
@@ -145,7 +126,6 @@
             </div>
         </section>
 
-        <!-- 右側：技術核心解析與資料庫連動面板 (佔 5 欄) -->
         <section class="xl:col-span-5 flex flex-col space-y-6">
             
             <!-- 同仁步驟與系統響應說明 -->
@@ -169,7 +149,7 @@
                         </p>
                     </div>
 
-                    <!-- 2. LINE 即時訊息與彈窗文字 (替代原本的程式碼區塊) -->
+                    <!-- 2. LINE 即時訊息與彈窗文字 -->
                     <div>
                         <h3 class="text-xs text-slate-400 font-semibold mb-1.5 flex items-center gap-1.5">
                             <span class="w-1.5 h-1.5 bg-sky-400 rounded-full"></span> 💬 LINE 聊天室實際互動內容
@@ -195,7 +175,7 @@
                 </div>
             </div>
 
-            <!-- 雲端試算表狀態連動 (組員教育訓練用：強調一切自動登錄，不需組員手動處理) -->
+            <!-- 雲端試算表狀態連動 -->
             <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 backdrop-blur-sm flex flex-col min-h-[290px] flex-1">
                 <div class="flex flex-wrap items-center justify-between border-b border-slate-800 pb-3 mb-3 gap-2">
                     <div class="flex items-center space-x-2">
@@ -240,7 +220,7 @@
 
     <script>
         // ==========================================
-        // 1. 互動式場景與步驟資料定義 (精確重校聚焦框比例，完美鎖定按鈕及警報卡片)
+        // 1. 互動式場景與步驟資料定義 (完全淨化，徹底移除 hotspot 屬性與其關聯功能)
         // ==========================================
         const SCENARIOS = [
             {
@@ -254,7 +234,6 @@
                         title: "步驟 1.1 ➔ 掃描 QR Code 或是搜尋 ID 加入好友",
                         role: "新進同仁",
                         date: "2026-06-09",
-                        hotspot: { top: "22%", left: "10%", width: "80%", height: "56%" },
                         explanation: "第一次使用系統前，請拿起手機掃描上圖 QR Code，或直接在 LINE 搜尋官方 ID「@051yicar」加入「黃光請假機器人」為好友。這是啟動所有功能的起點！",
                         interactiveText: "系統提示：\n「[黃光請假機器人] 已將您加入好友。請點擊聊天室開始您的自主排班請假管理。」",
                         interactiveType: "好友加入畫面",
@@ -265,7 +244,6 @@
                         title: "步驟 1.2 ➔ 在聊天室輸入「說明」或點選選單",
                         role: "新進同仁",
                         date: "2026-06-09",
-                        hotspot: { top: "15%", left: "8%", width: "84%", height: "62%" },
                         explanation: "初次使用時，可以隨時在對話框輸入中文字「說明」或直接點選圖文選單。機器人會立刻回覆系統的基礎操作指令指引卡，幫助您快速上手四大核心功能。",
                         interactiveText: "黃光機器人回覆：\n「🎉 歡迎使用黃光排班系統！\n\n⚙️ 快速功能指令對照：\n👤 輸入【 註冊 】：綁定姓名與主管。\n📅 輸入【 請假 】：開始發起代班申請表單。\n🔍 輸入【 查詢 】：隨時調出您未來的請假/代班表。\n📊 輸入【 統計 】：即時看本月組內熱心協助排行。」",
                         interactiveType: "機器人回覆",
@@ -276,7 +254,6 @@
                         title: "步驟 1.3 ➔ 完成真實姓名與所屬 Leader 登記",
                         role: "新進同仁",
                         date: "2026-06-09",
-                        hotspot: { top: "36%", left: "8%", width: "84%", height: "38%" },
                         explanation: "輸入「註冊」後，請按照機器人指引打上您的『真實姓名』（此處測試打上『測試用』）。接著，聊天室會自動跳出主管（Leader）選單。請點選您實際隸屬的主管（例如：點選『洪偉智』）即完成一次性綁定！",
                         interactiveText: "黃光機器人登記引導：\n「確認您的姓名為【測試用】。\n請接著點選您的所屬主管：\n👉 [湯榮銘]  👉 [洪偉智]  👉 [江亞承]  👉 [潘承陽]\n\n(點選後) ➔ 🎉 註冊登記成功！您已被歸類在 [洪偉智] 主管組別。現在可以開始使用排班異動服務。」",
                         interactiveType: "按鈕與登記卡片",
@@ -295,7 +272,6 @@
                         title: "步驟 2.1 ➔ 輸入「請假」開啟網頁表單",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
-                        hotspot: { top: "22%", left: "8%", width: "84%", height: "24%" },
                         explanation: "當您需要請假時，直接在 LINE 對話框輸入「請假」，或點擊選單。只要您是已註冊同仁，機器人就會立刻傳送「填寫請假代班」的綠色傳送連結，點擊它即可免登入開啟專屬請假網頁！",
                         interactiveText: "黃光機器人回覆：\n「請點擊下方綠色按鈕開啟排班請假申請表：\n🟢 [點我開啟排班請假申請 (LIFF網頁)]」",
                         interactiveType: "LIFF 網頁入口連結",
@@ -306,7 +282,6 @@
                         title: "步驟 2.2 ➔ 選擇日期，並精準選取代班人",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
-                        hotspot: { top: "24%", left: "5%", width: "90%", height: "54%" },
                         explanation: "進入網頁後：\n1. 請假姓名已自動鎖定，無法竄改。\n2. 點選『請假日期』(例如選定 2026-06-10)。\n3. 第一步選擇代班同仁的主管 (例: 湯榮銘)。\n4. 第二步即可精準選取該主管下的組員 (例: 蔡一傑)。雙層選單讓您不怕選錯人！",
                         interactiveText: "請假表單頁面欄位：\n【請假同仁】：測試用 (系統已鎖定)\n【選擇日期】：2026-06-10\n【1. 選擇代班主管】：湯榮銘\n【2. 選擇代班同仁】：蔡一傑",
                         interactiveType: "前端網頁畫面",
@@ -317,7 +292,6 @@
                         title: "步驟 2.3 ➔ 送出申請，網頁彈窗確認",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
-                        hotspot: { top: "38%", left: "10%", width: "80%", height: "24%" },
                         explanation: "按下最底部的『送出請假申請』。此時系統會進行雲端即時防呆驗證。驗證成功後，網頁會彈出『🎉 申請成功！已通知代班同仁。』確認彈窗，點擊確認後網頁將自動關閉，返回 LINE 視窗。",
                         interactiveText: "網頁提示訊息：\n「🎉 申請成功！已通知代班同仁。系統已發送審核訊息給您指定的代班人。請提醒對方至 LINE 進行確認同意！」",
                         interactiveType: "網頁確認彈窗",
@@ -328,7 +302,6 @@
                         title: "步驟 2.4 ➔ 代班人蔡一傑在 LINE 收到確認通知",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-10",
-                        hotspot: { top: "16%", left: "8%", width: "84%", height: "36%" },
                         explanation: "此時，您指定的代班同仁「蔡一傑」在 LINE 會立刻收到一個亮眼的審核通知卡片。卡片上清楚顯示是誰、在什麼時候請假。蔡一傑可以自由點選卡片底部的『同意幫忙』或『無法代班』按鈕！",
                         interactiveText: "蔡一傑手機上的卡片：\n「✋ 代班請求通知\n同仁【測試用】請求您在 [2026-06-10] 協助代班。\n\n[ 同意幫忙 ]   [ 無法代班 ]」",
                         interactiveType: "代班人 LINE 卡片",
@@ -339,7 +312,6 @@
                         title: "步驟 2.5 ➔ 代班人按下同意，代班手續完成",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-10",
-                        hotspot: { top: "38%", left: "8%", width: "84%", height: "36%" },
                         explanation: "當代班人「蔡一傑」確認當天時間允許，並點擊『同意幫忙』➔ 系統自動更新雲端班表為 OK 生效，並發送確認訊息，告知同仁可以隨時至「自主異動中心」查看未來代班歷史。",
                         interactiveText: "蔡一傑手機回覆訊息：\n「確認成功！感謝您熱心協助同仁代班。\n\n若後續因故臨時有變更，可點擊下方按鈕進入「排班自主異動中心」進行勾選取消作廢。\n👉 [ 進入異動中心 ]」",
                         interactiveType: "代班人同意回饋",
@@ -350,7 +322,6 @@
                         title: "步驟 2.6 ➔ 請假同仁即時收到「OK 生效通知」",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
-                        hotspot: { top: "28%", left: "8%", width: "84%", height: "20%" },
                         explanation: "代班人蔡一傑點下同意的那一刻，請假同仁「測試用」的手機 LINE 會瞬間收到主動推播喜訊：『👍 好消息！蔡一傑已同意在 2026-06-10 幫您代班！試算表狀態已正式更新為【OK】。』，請假程序大功告成！",
                         interactiveText: "測試用手機主動推播：\n「👍 好消息！蔡一傑已同意在 2026-06-10 幫您代班！\n\n試算表狀態已更新為【OK】，您可以安心休假囉。」",
                         interactiveType: "請假人手機推播",
@@ -369,7 +340,6 @@
                         title: "步驟 3.1 ➔ 重複申請同一天將會被系統阻擋",
                         role: "請假人 (測試用)",
                         date: "2026-06-10",
-                        hotspot: { top: "38%", left: "10%", width: "80%", height: "24%" },
                         explanation: "系統設有嚴密防呆！如果同仁忘記自己之前已經在 2026-06-10 請過假，又或者該日期的請假還在『待確認』審核中，同仁若是重複嘗試對同一天送出請假，在網頁前端點下送出時，會立刻彈出黃色警告攔截，禁止送出！",
                         interactiveText: "網頁彈窗警告：\n「⚠️ 申請攔截：您在 2026-06-10 這天已經有正在進行中(或已同意)的申請紀錄囉，請勿重複提交表單！」",
                         interactiveType: "網頁防呆彈窗",
@@ -380,7 +350,6 @@
                         title: "步驟 3.2 ➔ 代班人蔡一傑拒絕代班申請",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-24",
-                        hotspot: { top: "38%", left: "8%", width: "84%", height: "22%" },
                         explanation: "如果蔡一傑看了一下排班，發現 2026-06-24 當天自己也有事，因此在 LINE 點擊了紅色按鈕『無法代班』。系統會立刻將該筆代班申請的狀態標記為 NO（拒絕不生效），並向蔡一傑回覆「已完成回報」。",
                         interactiveText: "蔡一傑手機回覆訊息：\n「已幫您回報無法代班，系統將自動通知原請假同仁。辛苦了！」",
                         interactiveType: "代班人拒絕回饋",
@@ -391,7 +360,6 @@
                         title: "步驟 3.3 ➔ 請假同仁 LINE 即時接收退回警報",
                         role: "請假人 (測試用)",
                         date: "2026-06-24",
-                        hotspot: { top: "28%", left: "8%", width: "84%", height: "20%" },
                         explanation: "當代班人「蔡一傑」拒絕的那一秒鐘，請假人「測試用」手機 LINE 會自動彈出醒目的紅色退回推播。告知對方已拒絕，請同仁務必點選請假功能重新尋找其他同仁代班！",
                         interactiveText: "測試用手機接收推播：\n「❌ 嗶嗶！蔡一傑已【拒絕】您在 2026-06-24 的代班請求。\n\n請您點擊「請假」重新向其他同仁代班！」",
                         interactiveType: "請假人被拒推播",
@@ -410,7 +378,6 @@
                         title: "步驟 4.1 ➔ 輸入「查詢」看個人排班表與連結",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
-                        hotspot: { top: "12%", left: "8%", width: "84%", height: "68%" },
                         explanation: "想知道自己未來有哪幾天請假成功、或者哪幾天答應要幫別人代班嗎？直接在 LINE 聊天室鍵盤打上中文字「查詢」，機器人就會幫您將未來的所有班表總整理，並分門別類列出。同時附上變更連結！",
                         interactiveText: "黃光機器人回覆查詢：\n「🔍 【您的未來排班異動總覽】\n\n📤 1. 您發起的請假申請：\n▫️ 2026-06-10 (代班人: 蔡一傑 [OK])\n▫️ 2026-06-11 (代班人: 蔡一傑 [OK])\n▫️ 2026-06-29 (代班人: 蔡一傑 [OK])\n\n📥 2. 您答應的代班行程：\n▫️ 2026-06-09 (幫【蔡一傑】代班)\n\n━━━━━━━━━━━━━━━\n💡 若欲撤銷請假或特定代班，請點點擊下方按鈕：\n🚨 [ 進入自主異動中心 (撤回/取消) ]」",
                         interactiveType: "機器人查詢結果",
@@ -421,7 +388,6 @@
                         title: "步驟 4.2 ➔ 進入「自主異動中心」網頁列表",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
-                        hotspot: { top: "24%", left: "5%", width: "90%", height: "56%" },
                         explanation: "點選「進入自主異動中心」按鈕會開啟專屬 LIFF 網頁，網頁上會用明確的紅色/藍色標籤，列出您「我請假 (📤)」與「我代班 (📥)」的所有未來明細。只要勾選想要撤銷的排班行，即可執行一鍵取消！",
                         interactiveText: "異動中心網頁畫面：\n「💡 請勾選您欲作廢的未來日期（系統將精準移除該天並自動通知對方同仁）：\n\n[X] 2026-06-11 - 我請假 (由蔡一傑代班) [OK]\n[ ] 2026-06-09 - 我代班 (幫蔡一傑代班) [OK]\n[ ] 2026-06-29 - 我請假 (由蔡一傑代班) [OK]\n[ ] 2026-06-10 - 我請假 (由蔡一傑代班) [OK]」",
                         interactiveType: "前端網頁畫面",
@@ -432,7 +398,6 @@
                         title: "步驟 4.3 ➔ 勾選日期並按下確認作廢",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
-                        hotspot: { top: "38%", left: "10%", width: "80%", height: "24%" },
                         explanation: "勾選完您想要作廢的日期後，點點擊最下方的『確認撤銷/作廢選取日期』按鈕。此時網頁會再次跳出二次警示對話框：『確定要將勾選日期的排班紀錄作廢移除嗎？』確保同仁不是一時手滑按錯。",
                         interactiveText: "網頁確認對話框：\n「確定要將勾選日期的排班紀錄作廢移除嗎？\n⚠️ 取消後，系統會自動在後台進行除名，並將發送 LINE 通知給原本與您配對的同仁蔡一傑！」",
                         interactiveType: "二次確認彈窗",
@@ -443,7 +408,6 @@
                         title: "步驟 4.4 ➔ 網頁彈窗確認作廢扣除完成",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
-                        hotspot: { top: "38%", left: "10%", width: "80%", height: "24%" },
                         explanation: "按下確認後，網頁會彈出紅色警告驚嘆號對話框：『🚨 變更成功！排班紀錄已作廢扣除。』，點選確定即可自動關閉網頁。後台的假單正式宣告註銷，不留任何混亂髒資料。",
                         interactiveText: "網頁提示訊息：\n「🚨 變更成功！排班紀錄已作廢扣除。\n\n系統已完成取消，並已寄發通知訊息給蔡一傑。網頁視窗即將自動關閉。」",
                         interactiveType: "網頁完成彈窗",
@@ -454,7 +418,6 @@
                         title: "步驟 4.5 ➔ 代班同仁手機自動收到「免代班」溫馨通知",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-11",
-                        hotspot: { top: "48%", left: "8%", width: "84%", height: "22%" },
                         explanation: "「測試用」取消請假後，原本答應幫忙代班的同仁「蔡一傑」什麼都不需要做。他的手機 LINE 會主動收到系統寄出的溫馨免代班通知，告知蔡一傑那一天「不用去代班了」，系統已將蔡一傑的時間釋放出來，可以開心放假！",
                         interactiveText: "蔡一傑手機接收主動推播：\n「通知：測試用已撤回了 2026-06-10 的請假申請（您當天【不用代班】了）。\n\n系統已釋放您的代班時間，祝放假愉快！」",
                         interactiveType: "代班人通知推播",
@@ -473,7 +436,6 @@
                         title: "步驟 5.1 ➔ 代班同仁臨時有事欲取消代班",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-11",
-                        hotspot: { top: "24%", left: "5%", width: "90%", height: "56%" },
                         explanation: "若代班人「蔡一傑」原本答應在 2026-06-11 幫「測試用」代班，但臨時家中有急事、當天突然無法履行。這時他同樣可以開啟「自主異動中心」，找到「[您的代班] 幫【測試用】代班」那一列進行勾選取消。",
                         interactiveText: "蔡一傑進入異動中心：\n「[X] 2026-06-11 - 我代班 (幫【測試用】代班) [OK]」\n點選下方紅色按鈕：【確認撤銷/作廢選取日期】",
                         interactiveType: "代班人網頁畫面",
@@ -484,18 +446,16 @@
                         title: "步驟 5.2 ➔ 蔡一傑完成作廢，系統彈窗提示",
                         role: "代班人 (蔡一傑)",
                         date: "2026-06-11",
-                        hotspot: { top: "38%", left: "10%", width: "80%", height: "24%" },
                         explanation: "蔡一傑勾選確認取消➔ 網頁彈出提示：『🚨 變更成功！排班紀錄已作廢扣除。』這筆紀錄在雲端正式失效。蔡一傑的手機畫面退回聊天室。",
                         interactiveText: "網頁確認彈窗：\n「🚨 變更成功！排班紀錄已作廢扣除。系統已在背景同步將 2026-06-11 標註為失效，並對原請假人『測試用』發出緊急失效警報！」",
                         interactiveType: "網頁完成彈窗",
-                        ruleTip: "代班人取消後，這天在雲端系統上會恢復成「測試用自己值班，沒有代班人」的原始狀態。因此接下來，系統會啟動「防堵缺工警報」！"
+                        ruleTip: "代班人取消後，這天在雲端系統上會恢復成「測試用自己值班，沒有代班人’」的原始狀態。因此接下來，系統會啟動「防堵缺工警報」！"
                     },
                     {
                         img: "19.png",
                         title: "步驟 5.3 ➔ 請假同仁手機驚天一震！收到「緊急失效警報」",
                         role: "請假人 (測試用)",
                         date: "2026-06-11",
-                        hotspot: { top: "66%", left: "10%", width: "80%", height: "14%" },
                         explanation: "蔡一傑取消代班的那一剎那，因為這天又沒有代班人了，請假同仁「測試用」的手機 LINE 會立刻彈出一則極為顯眼、帶有黃色三角警告標誌的**緊急失效警報**！告知測試用原本的代班人反悔了，必須『立刻重新請假、重新找人代班』，避免屆時站台空班遭處分！",
                         interactiveText: "測試用手機接收警報推播：\n「⚠️ 警報！原定於 2026-06-11 幫您代班的 蔡一傑 因故【臨時無法前往】。\n\n該天代班已失效，請您立刻點擊「請假」按鈕，重新向其他同仁代班！」",
                         interactiveType: "緊急失效警報推播",
@@ -514,7 +474,6 @@
                         title: "步驟 6.1 ➔ 輸入「統計」看本月熱心協助代班排行榜",
                         role: "主管與組員",
                         date: "2026-06-11",
-                        hotspot: { top: "30%", left: "8%", width: "84%", height: "42%" },
                         explanation: "輸入「統計」➔ 點點擊主管姓名（例：湯榮銘）➔ 機器人會在聊天室立刻渲染出組內同仁在本月份『熱心協助代班』次數與請假次數的龍虎榜！誰是組內的代班之星、熱心好幫手，一清二楚！",
                         interactiveText: "湯榮銘組別熱心排行回覆：\n「🏆 【 湯榮銘 組別 - 2026年06月 】\n(本月確認代班累計)\n━━━━━━━━━━━━━━━\n🏅 蔡一傑\n  🔹 熱心代班：2 次\n  🔸 請假累計：1 次\n\n-------------------------------」",
                         interactiveType: "排行統計卡片",
@@ -525,7 +484,6 @@
                         title: "步驟 6.2 ➔ 管理後台：主管打包更名轉移",
                         role: "系統管理員",
                         date: "2026-06-18",
-                        hotspot: { top: "14%", left: "5%", width: "90%", height: "46%" },
                         explanation: "這部分是管理員專屬的後台網頁（`?page=admin`）。管理員可在此進行主管「一鍵整批更名」。例如某主管調離職務或升遷，在後台選取後，底下的組員便能整批打包移轉到新主管名下。同時也能觀看全公司直條圖統計分析。",
                         interactiveText: "管理後台主管更名功能：\n【組織 Leader 名稱異動專區】：\n1. 選擇舊主管：洪偉智\n2. 輸入新姓名：林志強\n👉 [ 執行一鍵全組更名轉移 ]\n(雲端在背景將所有洪偉智的組員全自動轉移給林志強)",
                         interactiveType: "管理後台網頁",
@@ -536,7 +494,6 @@
                         title: "步驟 6.3 ➔ 管理後台：組員調組與預約未來生效",
                         role: "系統管理員",
                         date: "2026-06-18",
-                        hotspot: { top: "56%", left: "5%", width: "90%", height: "36%" },
                         explanation: "若個別同仁發生調組（例如蔡一傑即將調去江亞承組），管理員可以直接選取蔡一傑，並填寫『未來的調職生效日期 (例如: 2026-06-18)』。設定好後送出預約，雲端排程會在當天半夜自動生效，並「強制清理他原組別未來的代班表並寄發請假人警報」，杜絕跨組管理的漏洞！",
                         interactiveText: "調組移轉預約功能：\n【組員】：蔡一傑\n【1. 變更 Leader 為】：江亞承\n【2. 預定生效日期】：2026-06-18\n👉 [ 確認變更 / 提交預約 ]",
                         interactiveType: "管理後台網頁",
@@ -597,7 +554,6 @@
             document.getElementById('sim-date').innerText = currentStep.date;
         }
 
-        // 渲染左側場景選單
         function renderScenariosMenu() {
             const container = document.getElementById('scenario-list');
             container.innerHTML = "";
@@ -654,13 +610,11 @@
             imgEl.onload = function() {
                 fallbackEl.classList.add('hidden');
                 imgEl.classList.remove('hidden');
-                drawHotspot(step.hotspot);
             };
 
             imgEl.onerror = function() {
                 imgEl.classList.add('hidden');
                 fallbackEl.classList.remove('hidden');
-                document.getElementById('hotspot-overlay').classList.add('hidden');
             };
 
             // 3. 填入組員導向文字與 LINE 對話對照
@@ -694,20 +648,6 @@
             if (currentStepIdx < scenario.steps.length - 1) {
                 currentStepIdx++;
                 loadStep(currentScenarioIdx, currentStepIdx);
-            }
-        }
-
-        // 在圖片上繪製高脈衝聚焦綠色框
-        function drawHotspot(rect) {
-            const overlay = document.getElementById('hotspot-overlay');
-            if (rect) {
-                overlay.style.top = rect.top;
-                overlay.style.left = rect.left;
-                overlay.style.width = rect.width;
-                overlay.style.height = rect.height;
-                overlay.classList.remove('hidden');
-            } else {
-                overlay.classList.add('hidden');
             }
         }
 
@@ -768,7 +708,6 @@
             }
         }
 
-        // 渲染資料庫 Tab 表格
         function switchTableTab(tabName) {
             activeTableTab = tabName;
             ["users", "Leaves", "Config_Org"].forEach(t => {
@@ -883,7 +822,7 @@
                 "10.png": "【LIFF 網頁 - 排班自主異動中心】\n網頁上清楚條列出您未來所有排定行程，同仁可在各行前方勾選並進行一鍵作廢移除。",
                 "11.png": "【LIFF 網頁 - 自主作廢二次確認框】\n點選作廢後，彈窗確認『確定要將勾選日期的排班紀錄作廢移除嗎？』，提供雙重防護防手滑。",
                 "12.png": "【LIFF 網頁 - 取消成功完成扣除】\n作廢完畢彈窗『🚨 變更成功！排班紀錄已作廢扣除。』，背景資料已重置更新。",
-                "13.png": "【LINE 聊天室 - 統計排行榜】\n輸入『統計』並選主管姓名，機器人吐出當月全組熱心代班同仁的次數金銀銅龍虎排行榜。",
+                "13.png": "【LINE 聊天室 - 統計排行榜】\n輸入『統計』並選主管姓名，機器人吐出當月全組熱心代班同仁ㄎ的次數金銀銅龍虎排行榜。",
                 "14.png": "【代班人手機 - LINE 審核 Flex 卡片】\n代班同仁蔡一傑手機收到大張綠色按鈕卡片，可直接點選『同意幫忙』或『無法代班』進行決策回報。",
                 "15.png": "【代班人手機 - 按下無法代班的回饋】\n蔡一傑按紅色按鈕後，回覆『已幫您回報無法代班，系統將自動通知原請假同仁。』",
                 "16.png": "【代班人手機 - 請假人自主取消 ➔ 溫馨免代班通知】\n當請假人撤回假單，原代班人蔡一傑收到推播：『通知：測試用已撤回了請假（您當天【不用代班】了），祝放假愉快！』",
